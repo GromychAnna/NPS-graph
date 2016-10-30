@@ -1,0 +1,29 @@
+<!--<div class="hello-world" ng-bind="ctrl.greeting">-->
+<!--</div>-->
+
+<table class="table">
+  <tr>
+    <th ng-bind="$ctrl.peoples.firstName"></th>
+    <th>{{$scope.peoples[2].firstName}}</th>
+    <th>Role</th>
+    <th>Company</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Score</th>
+    <th>Action</th>
+  </tr>
+  {{$scope.peoples}}
+  {{$scope.peoples.firstName}}
+  <tr ng-repeat="person in $scope.peoples">
+    <td ng-bind="person.firstName"></td>
+    <td ng-bind="person.lastName"></td>
+    <td ng-bind="person.role"></td>
+    <td ng-bind="person.company"></td>
+    <td ng-bind="person.email"></td>
+    <td ng-bind="person.phone"></td>
+    <td ng-bind="person.score"></td>
+    <td>
+      <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow(person.firstName)"/>
+    </td>
+  </tr>
+</table>
