@@ -3,8 +3,8 @@
 
 <table class="table">
   <tr>
-    <th ng-bind="$ctrl.peoples.firstName"></th>
-    <th>{{$scope.peoples[2].firstName}}</th>
+    <th>First Name</th>
+    <th>Last Name</th>
     <th>Role</th>
     <th>Company</th>
     <th>Email</th>
@@ -12,9 +12,7 @@
     <th>Score</th>
     <th>Action</th>
   </tr>
-  {{$scope.peoples}}
-  {{$scope.peoples.firstName}}
-  <tr ng-repeat="person in $scope.peoples">
+  <tr ng-repeat="person in ctrl.peoples">
     <td ng-bind="person.firstName"></td>
     <td ng-bind="person.lastName"></td>
     <td ng-bind="person.role"></td>
@@ -23,7 +21,8 @@
     <td ng-bind="person.phone"></td>
     <td ng-bind="person.score"></td>
     <td>
-      <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow(person.firstName)"/>
+      <input type="button" value="Remove" class="btn btn-primary" ng-click="ctrl.removeRow(person.firstName)"/>
+      <input type="button" value="Add" class="btn btn-primary" ng-click="ctrl.addRow()"/>
     </td>
   </tr>
 </table>

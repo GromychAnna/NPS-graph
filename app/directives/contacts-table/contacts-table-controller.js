@@ -1,11 +1,11 @@
 export default function ($scope) {
-    $scope.peoples = [
+    this.peoples = [
         {
             'firstName': 'Adele',
             'lastName': 'Hargarden',
             'role': 'Ingeneer',
             'company': 'SS',
-            'e-mail': 'Adele@gmail.com',
+            'email': 'Adele@gmail.com',
             'phone': '0501234569',
             'score': '25'
         },
@@ -14,7 +14,7 @@ export default function ($scope) {
             'lastName': 'Smith',
             'role': 'SEO',
             'company': 'SS',
-            'e-mail': 'John@gmail.com',
+            'email': 'John@gmail.com',
             'phone': '0501234569',
             'score': '-25'
         },
@@ -23,7 +23,7 @@ export default function ($scope) {
             'lastName': 'Bergner',
             'role': 'PM',
             'company': 'SS',
-            'e-mail': 'Michael@gmail.com',
+            'email': 'Michael@gmail.com',
             'phone': '0501234569',
             'score': '50'
         },
@@ -38,32 +38,29 @@ export default function ($scope) {
         }
     ];
 
-    console.warn('this', this);
-    console.warn('$scope.peoples', $scope.peoples);
-    this.greeting = 'Hello Webpack';
-    this.peoples = $scope.peoples;
+    //this.greeting = 'Hello Webpack';
     console.warn('this.peoples', this.peoples);
 
-    $scope.addRow = function(){
-        $scope.peoples.push({
-            'firstName':$scope.firstName,
-            'lastName': $scope.lastName,
-            'role':$scope.role,
-            'company':$scope.company,
-            'email':$scope.email,
-            'phone':$scope.phone,
-            'score':$scope.score });
-        $scope.firstName='';
-        $scope.lastName='';
-        $scope.role='';
-        $scope.company='';
-        $scope.email='';
-        $scope.phone='';
-        $scope.score='';
+    this.addRow = function(){
+        this.peoples.push({
+            'firstName':this.firstName,
+            'lastName': this.lastName,
+            'role':this.role,
+            'company':this.company,
+            'email':this.email,
+            'phone':this.phone,
+            'score':this.score });
+        this.firstName='';
+        this.lastName='';
+        this.role='';
+        this.company='';
+        this.email='';
+        this.phone='';
+        this.score='';
     };
-    $scope.removeRow = function(firstName){
+    this.removeRow = function(firstName){
         let index = -1;
-        let comArr = eval( $scope.peoples );
+        let comArr = eval( this.peoples );
         for( let i = 0; i < comArr.length; i++ ) {
             if( comArr[i].firstName === firstName ) {
                 index = i;
@@ -73,6 +70,6 @@ export default function ($scope) {
         if( index === -1 ) {
             alert( "Something gone wrong" );
         }
-        $scope.peoples.splice( index, 1 );
+        this.peoples.splice( index, 1 );
     };
 }
