@@ -1,6 +1,3 @@
-//import autoprefixer from 'autoprefixer';
-//export default function config() {
-//  return {
 const scaleLinear = require('d3-scale');
 const path = require('path');
 const webpack = require('webpack');
@@ -11,8 +8,6 @@ module.exports = {
   context: path.resolve(__dirname, 'app'),
   entry: [
       './index.js'
-      //'babel-polyfill',
-      //'./app/directives/contacts-table/contacts-table.scss'
   ],
   devtool: 'inline-source-map',
   output: {
@@ -41,6 +36,9 @@ module.exports = {
   },
 
   module: {
+    preLoaders: [
+      { test: /\.json$/, loader: 'json'}
+    ],
     loaders: [
       {
         test: /\.js$/,

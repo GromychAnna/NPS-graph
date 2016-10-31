@@ -1,0 +1,55 @@
+{
+  "peoples": [
+    {
+      "id": "0",
+      "firstName": "Adele",
+      "lastName": "Hargarden",
+      "role": "Ingeneer",
+      "company": "SS",
+      "email": "Adele@gmail.com",
+      "phone": "0501234569",
+      "score": "25"
+    },
+    {
+      "id": "1",
+      "firstName": "John",
+      "lastName": "Smith",
+      "role": "SEO",
+      "company": "SS",
+      "email": "John@gmail.com",
+      "phone": "0501234569",
+      "score": "-25"
+    },
+    {
+      "id": "2",
+      "firstName": "Michael",
+      "lastName": "Bergner",
+      "role": "PM",
+      "company": "SS",
+      "email": "Michael@gmail.com",
+      "phone": "0501234569",
+      "score": "50"
+    },
+    {
+      "id": "3",
+      "firstName": "John",
+      "lastName": "Smith",
+      "role": "Ingeneer",
+      "company": "SS",
+      "email": "John@gmail.com",
+      "phone": "0501234569",
+      "score": "0"
+    },
+    {
+      "id": "4",
+      "firstName": "test",
+      "lastName": "test",
+      "role": "test",
+      "company": "test",
+      "email": "test@gmail.com",
+      "phone": "0501234569",
+      "score": "56"
+    }
+  ],
+  "selected": {}
+}

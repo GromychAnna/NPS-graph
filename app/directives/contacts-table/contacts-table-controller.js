@@ -1,45 +1,8 @@
+import peoples from './peoples.json'
 export default function ($scope) {
-    this.model = {
-        peoples: [
-            {
-                'firstName': 'Adele',
-                'lastName': 'Hargarden',
-                'role': 'Ingeneer',
-                'company': 'SS',
-                'email': 'Adele@gmail.com',
-                'phone': '0501234569',
-                'score': '25'
-            },
-            {
-                'firstName': 'John',
-                'lastName': 'Smith',
-                'role': 'SEO',
-                'company': 'SS',
-                'email': 'John@gmail.com',
-                'phone': '0501234569',
-                'score': '-25'
-            },
-            {
-                'firstName': 'Michael',
-                'lastName': 'Bergner',
-                'role': 'PM',
-                'company': 'SS',
-                'email': 'Michael@gmail.com',
-                'phone': '0501234569',
-                'score': '50'
-            },
-            {
-                'firstName': 'John',
-                'lastName': 'Smith',
-                'role': 'Ingeneer',
-                'company': 'SS',
-                'email': 'John@gmail.com',
-                'phone': '0501234569',
-                'score': '0'
-            }
-        ],
-        selected: {}
-    };
+    this.model = peoples;
+    //this.model = require('./peoples.json');
+
 
     console.warn('this.peoples', this.peoples);
     console.warn('this.model.peoples', this.model.peoples);
