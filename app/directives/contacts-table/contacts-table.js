@@ -1,12 +1,13 @@
-import styles from './contacts-table.scss'
+//import styles from './contacts-table.scss'
+//import jadeTpl from './contacts-table.jade'
 
 export default ngModule => {
   ngModule.directive('contactsTable', contactsTableFn);
-  //require('style!css!./contacts-table.scss');
+  require('./contacts-table.scss');
   function contactsTableFn() {
     return {
       template: require('./contacts-table.html'),
-      //template: require('./contacts-table.jade'),
+      //template: jadeTpl,
       controllerAs: 'ctrl',
       controller: require('./contacts-table-controller.js')
     }

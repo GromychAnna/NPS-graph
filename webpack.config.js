@@ -1,9 +1,10 @@
-import autoprefixer from 'autoprefixer';
+//import autoprefixer from 'autoprefixer';
 //export default function config() {
 //  return {
+const scaleLinear = require('d3-scale');
 const path = require('path');
 const webpack = require('webpack');
-//const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {

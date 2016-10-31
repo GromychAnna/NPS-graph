@@ -7,15 +7,26 @@
 </head>
 <body>
   <h1>NPS system</h1>
-  <contacts-table></contacts-table>
+
   <script src="bundle.js"></script>
+
+
+  <canvas id="viewport" width="800" height="600"></canvas>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+  <script src="arbor/lib/arbor.js"></script>
+  <script src="main.js"></script>
+  <style>
+    body{
+      margin:0;
+      padding:20px;
+      font:12px/17px Arial, sans-serif;
+      background:#f9f9f9;
+    }
+  </style>
+
+
+  <contacts-table></contacts-table>
+
 </body>
 </html>
-<!--<div ng-app="graph">-->
-  <!--<h1>Angular + Webpack + graph</h1>-->
-  <!--<hello-world></hello-world>-->
-<!--</div>-->
-<!--<div ng-app="table">-->
-  <!--<h1>Angular + Webpack + table</h1>-->
-  <!--<hello-world></hello-world>-->
-<!--</div>-->
