@@ -1,27 +1,39 @@
-//import autoprefixer from 'autoprefixer';
+import autoprefixer from 'autoprefixer';
 //export default function config() {
 //  return {
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+//const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
-  context: __dirname + '/app',
+  context: path.resolve(__dirname, 'app'),
   entry: [
-      './index.js',
+      './index.js'
       //'babel-polyfill',
       //'./app/directives/contacts-table/contacts-table.scss'
   ],
   devtool: 'inline-source-map',
   output: {
-    path: __dirname + '/app',
+    path: path.resolve(__dirname, 'app'),
     filename: './bundle.js'
   },
 
   watch: true,
+  watchPoll: true,
   watchOptions: {
-    aggregateTimeout: 300
+    ignored: /(node_modules|vendor_libs)/,
+    aggregateTimeout: 300,
+    poll: 500
   },
-
+  devServer: {
+    watchPoll: true,
+    watchOptions: {
+      ignored: /(node_modules|vendor_libs)/,
+      aggregateTimeout: 300,
+      poll: 500
+    }
+  },
   resolve: {
     modulesDirectories: [ 'node_modules'],
     extensions: [ '', '.js', '.jade', '.css', '.sass', '.scss', '.json' ]
@@ -40,19 +52,25 @@ module.exports = {
       },
       {
         test: /\.jade$/,
-        loader: 'jade'
+        loader: 'jade-loader'
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: ExtractTextPlugin.extract('style', 'css-loader!postcss-loader')
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loader: ExtractTextPlugin.extract('style', 'css-loader!postcss-loader!sass-loader')
+      },
+      {
+        test: /\.png$/,
+        loader: "url-loader?mimetype=image/png"
       }
     ]
   },
-
+  plugins: [
+    new ExtractTextPlugin('[name].styles.css')
+  ],
   'postcss': [
     autoprefixer({
       browsers: [
