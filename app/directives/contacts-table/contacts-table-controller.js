@@ -4,8 +4,10 @@ export default function ($scope) {
     console.warn('this.model.peoples', this.model.peoples);
 
     this.addRow = function(){
-        console.warn('length', this.model.peoples.length);
+        //console.warn('this.model.peoples.firstName', _.isEmpty(this.model.peoples.firstName));
         const newId = this.model.peoples.length + 1;
+
+        console.warn('this.model.peoples', this.model.peoples);
         this.model.peoples.push({
             "name": "node" + "_" + newId,
             "id": newId,
@@ -16,6 +18,7 @@ export default function ($scope) {
             "email": this.model.peoples.email,
             "phone": this.model.peoples.phone,
             "score": this.model.peoples.score });
+        console.warn('this.model.peoples', this.model.peoples);
         this.model.peoples.firstName='';
         this.model.peoples.lastName='';
         this.model.peoples.role='';
@@ -23,6 +26,15 @@ export default function ($scope) {
         this.model.peoples.email='';
         this.model.peoples.phone='';
         this.model.peoples.score='';
+    };
+    this.addEdge = function(){
+        this.model.edges.push({
+            "src": this.model.edges.src,
+            "dest": this.model.edges.dest
+        });
+        console.warn('this.model.edges', this.model.edges);
+        this.model.edges.src = '';
+        this.model.edges.dest = '';
     };
     this.removeRow = function(firstName){
         let index = -1;
