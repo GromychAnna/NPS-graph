@@ -1,4 +1,4 @@
-//import jQuery from '../node_modules/jquery/dist/jquery.min'
+//import $ from 'jquery';
 //const jQuery = require('../node_modules/jquery/dist/jquery.min');
 (function($){
 
@@ -114,7 +114,9 @@
         return that;
     };
 
-    $(document).ready(function(){
+    console.log(typeof $, typeof jQuery);
+
+    jQuery(document).ready(function(){
         console.warn('HI HI HI');
         var sys = arbor.ParticleSystem(1000, 600, 0.5); // create the system with sensible repulsion/stiffness/friction
         sys.parameters({gravity:true}); // use center-gravity to make the graph settle nicely (ymmv)
@@ -143,19 +145,19 @@
         //   }
         // })
 
-        sys.graft({
-            "nodes": [
-                {"name": "node_Ann"},
-                {"name": "node_Ben"},
-                {"name": "node_MOM"},
-                {"name": "node_4"},
-                {"name": "node_5"},
-                {"name": "node_6"},
-                {"name": "node_7"},
-                {"name": "node_8"},
-                {"name": "node_9"},
-                {"name": "node_10"}
-            ]
+        //sys.graft({
+        //    "nodes": [
+        //        {"name": "node_Ann"},
+        //        {"name": "node_Ben"},
+        //        {"name": "node_MOM"},
+        //        {"name": "node_4"},
+        //        {"name": "node_5"},
+        //        {"name": "node_6"},
+        //        {"name": "node_7"},
+        //        {"name": "node_8"},
+        //        {"name": "node_9"},
+        //        {"name": "node_10"}
+        //    ]
             //"edges": [
             //    {"src": "node_3", "dest": "node_2"},
             //    {"src": "node_5", "dest": "node_3"},
@@ -169,17 +171,21 @@
             //    {"src": "node_10", "dest": "node_2"},
             //    {"src": "node_1", "dest": "node_10"}
             //]
-        });
+        //});
 
         var nodes = require('./nodes.json');
         console.warn('nodes', nodes);
-        $.getJSON(nodes, //получаем с сервера файл с данными
+        nodes.map((node, id) => {
+console.log(node)
+        });
+        forEach(nodes, //получаем с сервера файл с данными
             function(data){
-                $.each(data.nodes, function(i,node){
+                console.warn('data', data);
+                jQuery.each(data.nodes, function(i,node){
                     sys.addNode(node.name); //добавляем вершину
                 });
 
-                $.each(data.edges, function(i,edge){
+                jQuery.each(data.edges, function(i,edge){
                     sys.addEdge(sys.getNode(edge.src),sys.getNode(edge.dest)); //добавляем грань
                 });
             });
