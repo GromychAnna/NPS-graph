@@ -1,28 +1,28 @@
 import peoples from './peoples.json'
 export default function ($scope) {
     this.model = peoples;
-    //this.model = require('./peoples.json');
-
-
-    console.warn('this.peoples', this.peoples);
     console.warn('this.model.peoples', this.model.peoples);
 
     this.addRow = function(){
+        console.warn('length', this.model.peoples.length);
+        const newId = this.model.peoples.length + 1;
         this.model.peoples.push({
-            'firstName':this.firstName,
-            'lastName': this.lastName,
-            'role':this.role,
-            'company':this.company,
-            'email':this.email,
-            'phone':this.phone,
-            'score':this.score });
-        this.firstName='';
-        this.lastName='';
-        this.role='';
-        this.company='';
-        this.email='';
-        this.phone='';
-        this.score='';
+            "name": "node" + "_" + newId,
+            "id": newId,
+            "firstName": this.model.peoples.firstName,
+            "lastName": this.model.peoples.lastName,
+            "role": this.model.peoples.role,
+            "company": this.model.peoples.company,
+            "email": this.model.peoples.email,
+            "phone": this.model.peoples.phone,
+            "score": this.model.peoples.score });
+        this.model.peoples.firstName='';
+        this.model.peoples.lastName='';
+        this.model.peoples.role='';
+        this.model.peoples.company='';
+        this.model.peoples.email='';
+        this.model.peoples.phone='';
+        this.model.peoples.score='';
     };
     this.removeRow = function(firstName){
         let index = -1;
@@ -39,10 +39,13 @@ export default function ($scope) {
         this.model.peoples.splice( index, 1 );
     };
     this.getTemplate = function (person) {
-        if (person.firstName === this.model.selected.firstName && person.lastName === this.model.selected.lastName ) return 'edit';
+        if (person.id === this.model.selected.id) {
+            return 'edit'
+        }
         return 'display';
     };
     this.editPerson = function (person) {
+        console.warn('this.model.selected', this.model.selected);
         this.model.selected = angular.copy(person);
     };
 
