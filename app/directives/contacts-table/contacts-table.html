@@ -1,6 +1,22 @@
 <!--<canvas width="960" height="600"></canvas>-->
 <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
-
+<style>
+  .action {
+    width: 150px;
+  }
+  .add-age-btn {
+    margin-top: 15px;
+    position: relative;
+    left: -95px;
+  }
+  .add-row-btn {
+    position: relative;
+    left: -95px;
+  }
+  .stakeholder {
+    margin-top: 10px;
+  }
+</style>
 
 <div class="row">
   <div class="col-md-4">
@@ -33,40 +49,40 @@
       <div class="form-group">
         <label class="col-md-4 control-label">Email</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="email" ng-model="ctrl.model.peoples.email" />
+          <input type="email" class="form-control" name="email" ng-model="ctrl.model.peoples.email" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Phone</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="phone" ng-model="ctrl.model.peoples.phone" />
+          <input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' class="form-control" name="phone" ng-model="ctrl.model.peoples.phone" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Score</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="score" ng-model="ctrl.model.peoples.score" />
+          <input type="number" min="-100" max="100" class="form-control" name="score" ng-model="ctrl.model.peoples.score" />
         </div>
       </div>
       <div class="form-group">
         <div style="padding-left:110px">
-          <input type="submit" value="Submit" class="btn btn-primary"/>
+          <input type="submit" value="Submit" class="btn btn-primary add-row-btn"/>
         </div>
       </div>
     </form>
     <form class="form-horizontal col-md-12" role="form" name="addEdgeForm" ng-submit="ctrl.addEdge()">
       <h2>Create connection between:</h2>
-      <label for="stakeholder1" class="col-md-12"> 1st stakeholder </label>
+      <label for="stakeholder1" class="col-md-12 stakeholder"> 1st stakeholder </label>
       <select class="form-control col-md-12" name="stakeholder1" id="stakeholder1" ng-model="ctrl.model.edges.src">
         <option ng-repeat="option in ctrl.model.peoples" value="{{option.id}}">{{option.firstName}}</option>
       </select>
-      <label for="stakeholder2" class="col-md-12"> 2nd stakeholder </label>
+      <label for="stakeholder2" class="col-md-12 stakeholder"> 2nd stakeholder </label>
       <select class="form-control col-md-12" name="stakeholder2" id="stakeholder2" ng-model="ctrl.model.edges.dest">
         <option ng-repeat="option in ctrl.model.peoples" value="{{option.id}}">{{option.firstName}}</option>
       </select>
       <div class="form-group">
         <div style="padding-left:110px">
-          <input type="submit" value="Submit" class="btn btn-primary"/>
+          <input type="submit" value="Submit" class="btn btn-primary add-age-btn"/>
         </div>
       </div>
     </form>
@@ -83,7 +99,7 @@
         <th>Email</th>
         <th>Phone</th>
         <th>Score</th>
-        <th>Action</th>
+        <th class="action">Action</th>
       </tr>
       <tr ng-repeat="person in ctrl.model.peoples" ng-include="ctrl.getTemplate(person)">
       </tr>
@@ -103,7 +119,7 @@
       <td ng-bind="person.email"></td>
       <td ng-bind="person.phone"></td>
       <td ng-bind="person.score"></td>
-      <td>
+      <td class="action">
         <!--<input type="button" value="Add" class="btn btn-primary" ng-click="ctrl.addRow()"/>-->
         <input type="button" value="Edit" class="btn btn-primary" ng-click="ctrl.editPerson(person)"/>
         <input type="button" value="Remove" class="btn btn-primary" ng-click="ctrl.removeRow(person.firstName)"/>
@@ -114,10 +130,10 @@
       <td><input type="text" class="form-control" ng-model="ctrl.model.selected.lastName" /></td>
       <td><input type="text" class="form-control" ng-model="ctrl.model.selected.role" /></td>
       <td><input type="text" class="form-control" ng-model="ctrl.model.selected.company" /></td>
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.email" /></td>
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.phone" /></td>
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.score" /></td>
-      <td>
+      <td><input type="email" class="form-control" ng-model="ctrl.model.selected.email" /></td>
+      <td><input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' class="form-control" ng-model="ctrl.model.selected.phone" /></td>
+      <td><input type="number" min="-100" max="100" class="form-control" ng-model="ctrl.model.selected.score" /></td>
+      <td class="action">
         <button type="button" class="btn btn-primary" ng-click="ctrl.savePerson($index)">Save</button>
         <button type="button" class="btn btn-primary" ng-click="ctrl.reset()">Cancel</button>
       </td>

@@ -264,17 +264,17 @@
         //            sys.addEdge(sys.getNode(edge.src),sys.getNode(edge.dest)); //добавляем грань
         //        });
         //    });
-        sys.addEdge('2','1');
-        sys.addEdge('4','2');
-        sys.addEdge('7','6');
-        sys.addEdge('0','3');
-        sys.addEdge('6','4');
-        sys.addEdge('6','4');
-        sys.addEdge('2','8');
-        sys.addEdge('1','3');
-        sys.addEdge('5','4');
-        sys.addEdge('8','0');
-        sys.addEdge('9','1');
+        //sys.addEdge('2','1');
+        //sys.addEdge('4','2');
+        //sys.addEdge('7','6');
+        //sys.addEdge('0','3');
+        //sys.addEdge('6','4');
+        //sys.addEdge('2','8');
+        //sys.addEdge('1','3');
+        //sys.addEdge('5','4');
+        //sys.addEdge('8','0');
+        //sys.addEdge('8','0');
+        //sys.addEdge('9','1');
 
     })
 
