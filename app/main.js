@@ -9,40 +9,18 @@
 
         var that = {
             init:function(system){
-                    //
-                    // the particle system will call the init function once, right before the
-                    // first frame is to be drawn. it's a good place to set up the canvas and
-                    // to pass the canvas size to the particle system
-                    //
-                    // save a reference to the particle system for use in the .redraw() loop
                 particleSystem = system;
-                    // inform the system of the screen dimensions so it can map coords for us.
-                    // if the canvas is ever resized, screenSize should be called again with
-                    // the new dimensions
                 particleSystem.screenSize(canvas.width, canvas.height);
-                particleSystem.screenPadding(80); // leave an extra 80px of whitespace per side
-                    // set up some event handlers to allow for node-dragging
+                particleSystem.screenPadding(80);
                 that.initMouseHandling();
             },
             redraw:function(){
-                    //
-                    // redraw will be called repeatedly during the run whenever the node positions
-                    // change. the new positions for the nodes can be accessed by looking at the
-                    // .p attribute of a given node. however the p.x & p.y values are in the coordinates
-                    // of the particle system rather than the screen. you can either map them to
-                    // the screen yourself, or use the convenience iterators .eachNode (and .eachEdge)
-                    // which allow you to step through the actual node objects but also pass an
-                    // x,y point in the screen's coordinate system
-                    //
                 ctx.fillStyle = "white";//белым цветом
                 ctx.fillRect(0,0, canvas.width, canvas.height);//закрашиваем всю область
 
                 particleSystem.eachEdge(//отрисуем каждую грань
-                    function(edge, pt1, pt2){//будем работать с гранями и точками её начала и конца
-                        // edge: {source:Node, target:Node, length:#, data:{}}
-                        // pt1:  {x:#, y:#}  source position in screen coords
-                        // pt2:  {x:#, y:#}  target position in screen coords
-                        // draw a line from pt1 to pt2
+                    function(edge, pt1, pt2){//будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}
+                        //console.warn('EDGE', edge);
                     ctx.strokeStyle = "rgba(0,0,0, .333)";//грани будут чёрным цветом с некой прозрачностью
                     ctx.lineWidth = 1;
                     ctx.beginPath();//начинаем рисовать
@@ -52,24 +30,19 @@
                 });
 
                 particleSystem.eachNode(//теперь каждую вершину
-                    function(node, pt){//получаем вершину и точку где она
-                        // node: {mass:#, p:{x,y}, name:"", data:{}}
-                        // pt:   {x:#, y:#}  node position in screen coords
-                        // draw a rectangle centered at pt
+                    function(node, pt){//получаем вершину и точку где она где node: {mass:#, p:{x,y}, name:"", data:{}}
                     var w = 10;//ширина квадрата
                     //ctx.fillStyle = (node.data.alone) ? "orange" : "black";
-                    ctx.fillStyle = "black";//с его цветом понятно
+                    ctx.fillStyle = "black";
                     ctx.fillRect(pt.x-w/2, pt.y-w/2, w,w);//рисуем
                     ctx.fillStyle = "black"; //цвет для шрифта
                     ctx.font = 'italic 13px sans-serif'; //шрифт
-                    ctx.fillText (node.name, pt.x+8, pt.y+8); //пишем имя у каждой точки
+                    ctx.fillText (node.data.name, pt.x+8, pt.y+8); //пишем имя у каждой точки
                 })
             },
 
             initMouseHandling:function(){//события с мышью no-nonsense drag and drop (thanks springy.js)
                 var dragged = null;//вершина которую перемещают
-                    // set up a handler object that will initially listen for mousedowns then
-                    // for moves and mouseups while dragging
                 var handler = {
                     clicked:function(e){//нажали
                         var pos = $(canvas).offset();//получаем позицию canvas
@@ -100,6 +73,14 @@
                         if (dragged===null || dragged.node===undefined) return;//если не перемещали, то уходим
                         if (dragged.node !== null) dragged.node.fixed = false;//если перемещали - отпускаем
                         dragged.node.tempMass = 1000;
+        alert('Node indormation:'
+            + '\r\n First Name: '  + dragged.node.data.firstName
+            + '\r\n Last Name: ' + dragged.node.data.lastName
+            + '\r\n Role: ' + dragged.node.data.role
+            + '\r\n Company: ' + dragged.node.data.company
+            + '\r\n Email: ' + dragged.node.data.email
+            + '\r\n Phone: ' + dragged.node.data.phone
+            + '\r\n Score: ' + dragged.node.data.score);
                         dragged = null;//очищаем
                         $(canvas).unbind('mousemove', handler.dragged);//перестаём слушать события
                         $(window).unbind('mouseup', handler.dropped);
@@ -115,7 +96,6 @@
     };
 
     $(document).ready(function(){
-        console.warn('HI HI HI');
         var sys = arbor.ParticleSystem(1000, 600, 0.5); // create the system with sensible repulsion/stiffness/friction
         sys.parameters({gravity:true}); // use center-gravity to make the graph settle nicely (ymmv)
         sys.renderer = Renderer("#viewport"); // our newly created renderer will have its .init() method called shortly by sys...
@@ -145,16 +125,116 @@
 
         sys.graft({
             "nodes": [
-                {"name": "node_Ann"},
-                {"name": "node_Ben"},
-                {"name": "node_MOM"},
-                {"name": "node_4"},
-                {"name": "node_5"},
-                {"name": "node_6"},
-                {"name": "node_7"},
-                {"name": "node_8"},
-                {"name": "node_9"},
-                {"name": "node_10"}
+                {
+                    "name": "node_1",
+                    "id": "1",
+                    "firstName": "Adele",
+                    "lastName": "Hargarden",
+                    "role": "Ingeneer",
+                    "company": "SS",
+                    "email": "Adele@gmail.com",
+                    "phone": "0501234569",
+                    "score": "25"
+                },
+                {
+                    "name": "node_2",
+                    "id": "2",
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "role": "SEO",
+                    "company": "SS",
+                    "email": "John@gmail.com",
+                    "phone": "0501234569",
+                    "score": "-25"
+                },
+                {
+                    "name": "node_3",
+                    "id": "3",
+                    "firstName": "Michael",
+                    "lastName": "Bergner",
+                    "role": "PM",
+                    "company": "SS",
+                    "email": "Michael@gmail.com",
+                    "phone": "0501234569",
+                    "score": "50"
+                },
+                {
+                    "name": "node_4",
+                    "id": "4",
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "role": "Ingeneer",
+                    "company": "SS",
+                    "email": "John@gmail.com",
+                    "phone": "0501234569",
+                    "score": "0"
+                },
+                {
+                    "name": "node_5",
+                    "id": "5",
+                    "firstName": "test5",
+                    "lastName": "test5",
+                    "role": "test5",
+                    "company": "test5",
+                    "email": "test@gmail.com",
+                    "phone": "0501234569",
+                    "score": "56"
+                },
+                {
+                    "name": "node_6",
+                    "id": "6",
+                    "firstName": "test6",
+                    "lastName": "test6",
+                    "role": "test6",
+                    "company": "test6",
+                    "email": "test@gmail.com",
+                    "phone": "0501234569",
+                    "score": "56"
+                },
+                {
+                    "name": "node_7",
+                    "id": "7",
+                    "firstName": "test7",
+                    "lastName": "test7",
+                    "role": "test7",
+                    "company": "test7",
+                    "email": "test@gmail.com",
+                    "phone": "0501234569",
+                    "score": "56"
+                },
+                {
+                    "name": "node_8",
+                    "id": "8",
+                    "firstName": "test8",
+                    "lastName": "test8",
+                    "role": "test8",
+                    "company": "test8",
+                    "email": "test@gmail.com",
+                    "phone": "0501234569",
+                    "score": "56"
+                },
+                {
+                    "name": "node_9",
+                    "id": "9",
+                    "firstName": "test9",
+                    "lastName": "test9",
+                    "role": "test9",
+                    "company": "test9",
+                    "email": "test@gmail.com",
+                    "phone": "0501234569",
+                    "score": "56"
+                },
+                {
+                    "name": "node_10",
+                    "id": "10",
+                    "firstName": "test10",
+                    "lastName": "test10",
+                    "role": "test10",
+                    "company": "test10",
+                    "email": "test@gmail.com",
+                    "phone": "0501234569",
+                    "score": "56"
+                }
             ]
             //"edges": [
             //    {"src": "node_3", "dest": "node_2"},
@@ -171,18 +251,18 @@
             //]
         });
 
-        var nodes = require('./nodes.json');
-        console.warn('nodes', nodes);
-        $.getJSON(nodes, //получаем с сервера файл с данными
-            function(data){
-                $.each(data.nodes, function(i,node){
-                    sys.addNode(node.name); //добавляем вершину
-                });
-
-                $.each(data.edges, function(i,edge){
-                    sys.addEdge(sys.getNode(edge.src),sys.getNode(edge.dest)); //добавляем грань
-                });
-            });
+        //var nodes = require('./nodes.json');
+        //console.warn('nodes', nodes);
+        //$.getJSON(nodes, //получаем с сервера файл с данными
+        //    function(data){
+        //        $.each(data.nodes, function(i,node){
+        //            sys.addNode(node.name); //добавляем вершину
+        //        });
+        //
+        //        $.each(data.edges, function(i,edge){
+        //            sys.addEdge(sys.getNode(edge.src),sys.getNode(edge.dest)); //добавляем грань
+        //        });
+        //    });
 
     })
 

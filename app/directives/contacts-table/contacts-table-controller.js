@@ -1,6 +1,10 @@
 import peoples from './peoples.json'
-export default function ($scope) {
+export default function ($scope, $http) {
     this.model = peoples;
+    //this.model = $http.get('/peoples.json')
+    //    .then(function(res){
+    //        $scope.peoples = res.data;
+    //    });
     console.warn('this.model.peoples', this.model.peoples);
 
     this.addRow = function(){
