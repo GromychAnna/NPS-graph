@@ -8,7 +8,8 @@ module.exports = {
   context: path.resolve(__dirname, 'app'),
   entry: [
       './index.js',
-      './main.js'
+      './main.js',
+      './db.js'
   ],
   devtool: 'inline-source-map',
   output: {

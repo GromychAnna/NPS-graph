@@ -20,7 +20,7 @@
 
                 particleSystem.eachEdge(//отрисуем каждую грань
                     function(edge, pt1, pt2){//будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}
-                        console.warn('EDGE', edge);
+                    //console.warn('EDGE', edge);
                     ctx.strokeStyle = "rgba(0,0,0, .333)";//грани будут чёрным цветом с некой прозрачностью
                     ctx.lineWidth = 1;
                     ctx.beginPath();//начинаем рисовать

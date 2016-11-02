@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html  ng-app="app">
 <head lang="en">
   <meta charset="UTF-8">
   <title>NPS</title>
@@ -10,8 +10,36 @@
 
   <script src="bundle.js"></script>
 
+  -------------------------------------------------------------------------------------------------------------------
+  <!--Example for DB-->
 
-  <canvas id="viewport" width="800" height="600"></canvas>
+  <script src="db.js"></script>
+
+
+  <div>
+    <div data-ng-app="indexDBSample" data-ng-controller="TodoController as vm">
+      <div class="form-group">
+        <input type="text" data-ng-model="vm.todoText" name="todo" placeholder="What's pending?" class="form-control" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-lg" data-ng-click="vm.addTodo()">Add</button>
+        <button class="btn btn-secondary btn-lg" data-ng-click="vm.refreshList()">Refresh</button>
+      </div>
+      <table class="table table-striped">
+        <tr data-ng-repeat="todo in vm.todos">
+          <td>{{todo.text}}</td>
+          <td><a href="#" data-ng-click="vm.deleteTodo(todo.id)"><span class="glyphicon glyphicon-trash"></span></a>
+
+          </td>
+        </tr>
+      </table>
+      <div class="footer text-muted">Jayesh</div>
+    </div>
+  </div>
+  -------------------------------------------------------------------------------------------------------------------
+
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <!--<script src="app/jquery/dist/jquery.min.js"></script>-->
   <script src="arbor/lib/arbor.js"></script>
@@ -25,8 +53,13 @@
     }
   </style>
 
+  <!--<canvas id="viewport" width="800" height="600"></canvas>-->
 
-  <contacts-table></contacts-table>
+  <!--<contacts-table></contacts-table>-->
+
+
+
+
 
 </body>
 </html>
