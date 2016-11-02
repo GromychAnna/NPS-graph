@@ -20,7 +20,7 @@
 
                 particleSystem.eachEdge(//отрисуем каждую грань
                     function(edge, pt1, pt2){//будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}
-                        //console.warn('EDGE', edge);
+                        console.warn('EDGE', edge);
                     ctx.strokeStyle = "rgba(0,0,0, .333)";//грани будут чёрным цветом с некой прозрачностью
                     ctx.lineWidth = 1;
                     ctx.beginPath();//начинаем рисовать
@@ -33,11 +33,11 @@
                     function(node, pt){//получаем вершину и точку где она где node: {mass:#, p:{x,y}, name:"", data:{}}
                     var w = 10;//ширина квадрата
                     //ctx.fillStyle = (node.data.alone) ? "orange" : "black";
-                    ctx.fillStyle = "black";
+                    ctx.fillStyle = "blue";
                     ctx.fillRect(pt.x-w/2, pt.y-w/2, w,w);//рисуем
                     ctx.fillStyle = "black"; //цвет для шрифта
                     ctx.font = 'italic 13px sans-serif'; //шрифт
-                    ctx.fillText (node.data.name, pt.x+8, pt.y+8); //пишем имя у каждой точки
+                    ctx.fillText (node.data.firstName, pt.x+8, pt.y+8); //пишем имя у каждой точки
                 })
             },
 
@@ -73,14 +73,14 @@
                         if (dragged===null || dragged.node===undefined) return;//если не перемещали, то уходим
                         if (dragged.node !== null) dragged.node.fixed = false;//если перемещали - отпускаем
                         dragged.node.tempMass = 1000;
-        alert('Node indormation:'
-            + '\r\n First Name: '  + dragged.node.data.firstName
-            + '\r\n Last Name: ' + dragged.node.data.lastName
-            + '\r\n Role: ' + dragged.node.data.role
-            + '\r\n Company: ' + dragged.node.data.company
-            + '\r\n Email: ' + dragged.node.data.email
-            + '\r\n Phone: ' + dragged.node.data.phone
-            + '\r\n Score: ' + dragged.node.data.score);
+                        alert('Node indormation:'
+                            + '\r\n First Name: '  + dragged.node.data.firstName
+                            + '\r\n Last Name: ' + dragged.node.data.lastName
+                            + '\r\n Role: ' + dragged.node.data.role
+                            + '\r\n Company: ' + dragged.node.data.company
+                            + '\r\n Email: ' + dragged.node.data.email
+                            + '\r\n Phone: ' + dragged.node.data.phone
+                            + '\r\n Score: ' + dragged.node.data.score);
                         dragged = null;//очищаем
                         $(canvas).unbind('mousemove', handler.dragged);//перестаём слушать события
                         $(window).unbind('mouseup', handler.dropped);
@@ -126,8 +126,8 @@
         sys.graft({
             "nodes": [
                 {
-                    "name": "node_1",
-                    "id": "1",
+                    //"name": "node_1",
+                    "id": "0",
                     "firstName": "Adele",
                     "lastName": "Hargarden",
                     "role": "Ingeneer",
@@ -137,8 +137,8 @@
                     "score": "25"
                 },
                 {
-                    "name": "node_2",
-                    "id": "2",
+                    //"name": "node_2",
+                    "id": "1",
                     "firstName": "John",
                     "lastName": "Smith",
                     "role": "SEO",
@@ -148,8 +148,8 @@
                     "score": "-25"
                 },
                 {
-                    "name": "node_3",
-                    "id": "3",
+                    //"name": "node_3",
+                    "id": "2",
                     "firstName": "Michael",
                     "lastName": "Bergner",
                     "role": "PM",
@@ -159,8 +159,8 @@
                     "score": "50"
                 },
                 {
-                    "name": "node_4",
-                    "id": "4",
+                    //"name": "node_4",
+                    "id": "3",
                     "firstName": "John",
                     "lastName": "Smith",
                     "role": "Ingeneer",
@@ -170,8 +170,8 @@
                     "score": "0"
                 },
                 {
-                    "name": "node_5",
-                    "id": "5",
+                    //"name": "node_5",
+                    "id": "4",
                     "firstName": "test5",
                     "lastName": "test5",
                     "role": "test5",
@@ -181,8 +181,8 @@
                     "score": "56"
                 },
                 {
-                    "name": "node_6",
-                    "id": "6",
+                    //"name": "node_6",
+                    "id": "5",
                     "firstName": "test6",
                     "lastName": "test6",
                     "role": "test6",
@@ -192,8 +192,8 @@
                     "score": "56"
                 },
                 {
-                    "name": "node_7",
-                    "id": "7",
+                    //"name": "node_7",
+                    "id": "6",
                     "firstName": "test7",
                     "lastName": "test7",
                     "role": "test7",
@@ -203,8 +203,8 @@
                     "score": "56"
                 },
                 {
-                    "name": "node_8",
-                    "id": "8",
+                    //"name": "node_8",
+                    "id": "7",
                     "firstName": "test8",
                     "lastName": "test8",
                     "role": "test8",
@@ -214,8 +214,8 @@
                     "score": "56"
                 },
                 {
-                    "name": "node_9",
-                    "id": "9",
+                    //"name": "node_9",
+                    "id": "8",
                     "firstName": "test9",
                     "lastName": "test9",
                     "role": "test9",
@@ -225,8 +225,8 @@
                     "score": "56"
                 },
                 {
-                    "name": "node_10",
-                    "id": "10",
+                    //"name": "node_10",
+                    "id": "9",
                     "firstName": "test10",
                     "lastName": "test10",
                     "role": "test10",
@@ -247,9 +247,10 @@
             //    {"src": "node_6", "dest": "node_5"},
             //    {"src": "node_9", "dest": "node_1"},
             //    {"src": "node_10", "dest": "node_2"},
-            //    {"src": "node_1", "dest": "node_10"}
+            //    {"source": "node_1", "target": "node_10"}
             //]
         });
+
 
         //var nodes = require('./nodes.json');
         //console.warn('nodes', nodes);
@@ -263,6 +264,17 @@
         //            sys.addEdge(sys.getNode(edge.src),sys.getNode(edge.dest)); //добавляем грань
         //        });
         //    });
+        sys.addEdge('2','1');
+        sys.addEdge('4','2');
+        sys.addEdge('7','6');
+        sys.addEdge('0','3');
+        sys.addEdge('6','4');
+        sys.addEdge('6','4');
+        sys.addEdge('2','8');
+        sys.addEdge('1','3');
+        sys.addEdge('5','4');
+        sys.addEdge('8','0');
+        sys.addEdge('9','1');
 
     })
 
