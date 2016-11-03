@@ -252,8 +252,8 @@
         });
 
 
-        var nodes = require('./nodes.json');
-        console.warn('nodes', nodes);
+        //var nodes = require('./nodes.json');
+        //console.warn('nodes', nodes);
         //$.getJSON(nodes, //получаем с сервера файл с данными
         //    function(data){
         //        $.each(data.nodes, function(i,node){
@@ -276,6 +276,6 @@
         //sys.addEdge('8','0');
         //sys.addEdge('9','1');
 
-    });
+    })
 
 //})(window.jQuery);

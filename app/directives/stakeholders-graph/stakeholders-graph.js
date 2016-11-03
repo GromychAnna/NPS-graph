@@ -6,7 +6,6 @@ export default ngModule => {
     function renderer (canvas, data){
         var ctx = canvas.getContext("2d");
         var particleSystem;
-
         var that = {
             init:function(system){
                 particleSystem = system;
@@ -15,12 +14,12 @@ export default ngModule => {
                 that.initMouseHandling();
             },
             redraw:function(){
-                ctx.fillStyle = "white";//белым цветом
-                ctx.fillRect(0,0, canvas.width, canvas.height);//закрашиваем всю область
+                ctx.fillStyle = "white";                                                                //белым цветом
+                ctx.fillRect(0,0, canvas.width, canvas.height);                                         //закрашиваем всю область
 
-                particleSystem.eachEdge(//отрисуем каждую грань
-                    function(edge, pt1, pt2){//будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}
-                        //console.warn('EDGE', data);
+                particleSystem.eachEdge(                                                                //отрисуем каждую грань
+                    function(edge, pt1, pt2){//будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}//console.warn('EDGE', data);
+                        //console.warn('EDGE', edge);
                         ctx.strokeStyle = "rgba(0,0,0, .333)";//грани будут чёрным цветом с некой прозрачностью
                         ctx.lineWidth = 1;
                         ctx.beginPath();//начинаем рисовать
@@ -29,49 +28,47 @@ export default ngModule => {
                         ctx.stroke();
                     });
 
-                particleSystem.eachNode(//теперь каждую вершину
-                    function(node, pt){//получаем вершину и точку где она где node: {mass:#, p:{x,y}, name:"", data:{}}
-                        var w = 10;//ширина квадрата
-                        //ctx.fillStyle = (node.data.alone) ? "orange" : "black";
+                particleSystem.eachNode(                                                                //теперь каждую вершину
+                    function(node, pt){                                                                 //получаем вершину и точку где она где node: {mass:#, p:{x,y}, name:"", data:{}}
+                        var w = 10;                                                                     //ширина квадрата //ctx.fillStyle = (node.data.alone) ? "orange" : "black";
                         ctx.fillStyle = "blue";
-                        ctx.fillRect(pt.x-w/2, pt.y-w/2, w,w);//рисуем
-                        ctx.fillStyle = "black"; //цвет для шрифта
-                        ctx.font = 'italic 13px sans-serif'; //шрифт
-                        ctx.fillText (node.data.firstName, pt.x+8, pt.y+8); //пишем имя у каждой точки
+                        ctx.fillRect(pt.x-w/2, pt.y-w/2, w,w);                                          //рисуем
+                        ctx.fillStyle = "black";                                                        //цвет для шрифта
+                        ctx.font = 'italic 13px sans-serif';                                            //шрифт
+                        ctx.fillText (node.data.firstName, pt.x+8, pt.y+8);                                       //пишем имя у каждой точки
                     })
             },
 
-            initMouseHandling:function(){//события с мышью no-nonsense drag and drop (thanks springy.js)
-                var dragged = null;//вершина которую перемещают
+            initMouseHandling:function(){                                                               //события с мышью no-nonsense drag and drop (thanks springy.js)
+                var dragged = null;                                                                     //вершина которую перемещают
                 var handler = {
-                    clicked:function(e){//нажали
-                        var pos = canvas.offset();//получаем позицию canvas
-                        _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top);//и позицию нажатия кнопки относительно canvas
-                        dragged = particleSystem.nearest(_mouseP);//определяем ближайшую вершину к нажатию
+                    clicked:function(e){                                                                //нажали
+                        var pos = canvas.offset();                                                      //получаем позицию canvas
+                        _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top);                       //и позицию нажатия кнопки относительно canvas
+                        dragged = particleSystem.nearest(_mouseP);                                      //определяем ближайшую вершину к нажатию
 
-                        if (dragged && dragged.node !== null){
-                            // while we're dragging, don't let physics move the node
-                            dragged.node.fixed = true;//фиксируем её
+                        if (dragged && dragged.node !== null){                                          // while we're dragging, don't let physics move the node
+                            dragged.node.fixed = true;                                                  //фиксируем её
                         }
-                        canvas.bind('mousemove', handler.dragged);//слушаем события перемещения мыши
-                        window.bind('mouseup', handler.dropped);//и отпускания кнопки
+                        canvas.bind('mousemove', handler.dragged);                                      //слушаем события перемещения мыши
+                        window.bind('mouseup', handler.dropped);                                        //и отпускания кнопки
 
                         return false;
                     },
-                    dragged:function(e){//перетаскиваем вершину
+                    dragged:function(e){                                                                //перетаскиваем вершину
                         var pos = canvas.offset();
                         var s = arbor.Point(e.pageX-pos.left, e.pageY-pos.top);
 
                         if (dragged && dragged.node !== null){
                             var p = particleSystem.fromScreen(s);
-                            dragged.node.p = p; //тянем вершину за нажатой мышью
+                            dragged.node.p = p;                                                         //тянем вершину за нажатой мышью
                         }
                         return false;
                     },
 
                     dropped:function(e){//отпустили
-                        if (dragged===null || dragged.node===undefined) return;//если не перемещали, то уходим
-                        if (dragged.node !== null) dragged.node.fixed = false;//если перемещали - отпускаем
+                        if (dragged===null || dragged.node===undefined) return;                         //если не перемещали, то уходим
+                        if (dragged.node !== null) dragged.node.fixed = false;                          //если перемещали - отпускаем
                         dragged.node.tempMass = 1000;
                         alert('Node indormation:'
                             + '\r\n First Name: '  + dragged.node.data.firstName
@@ -81,14 +78,14 @@ export default ngModule => {
                             + '\r\n Email: ' + dragged.node.data.email
                             + '\r\n Phone: ' + dragged.node.data.phone
                             + '\r\n Score: ' + dragged.node.data.score);
-                        dragged = null;//очищаем
-                        canvas.unbind('mousemove', handler.dragged);//перестаём слушать события
+                        dragged = null;                                                                 //очищаем
+                        canvas.unbind('mousemove', handler.dragged);                                    //перестаём слушать события
                         window.unbind('mouseup', handler.dropped);
                         _mouseP = null;
                         return false
                     }
                 };
-                // слушаем события нажатия мыши
+                                                                                                        // слушаем события нажатия мыши
                 canvas.addEventListener("mousedown", handler.clicked);
             }
         };
@@ -96,146 +93,50 @@ export default ngModule => {
     };
 
     function drawGraph (element, data) {
-        var sys = arbor.ParticleSystem(1000, 600, 0.5); // create the system with sensible repulsion/stiffness/friction
-        sys.parameters({gravity:true}); // use center-gravity to make the graph settle nicely (ymmv)
-        sys.renderer = renderer(element); // our newly created renderer will have its .init() method called shortly by sys...
-        sys.graft({
-            "nodes": [
+        console.warn('data', data);
+        var sys = arbor.ParticleSystem(1000, 600, 0.5);                                                 // create the system with sensible repulsion/stiffness/friction
+        sys.parameters({gravity:true});                                                                 // use center-gravity to make the graph settle nicely (ymmv)
+        sys.renderer = renderer(element, data);                                                         // our newly created renderer will have its .init() method called shortly by sys...
+
+        _.forEach(data.nodes, function(node) {
+            sys.addNode(node.id,
                 {
-                    //"name": "node_1",
-                    "id": "0",
-                    "firstName": "Adele",
-                    "lastName": "Hargarden",
-                    "role": "Ingeneer",
-                    "company": "SS",
-                    "email": "Adele@gmail.com",
-                    "phone": "0501234569",
-                    "score": "25"
-                },
-                {
-                    //"name": "node_2",
-                    "id": "1",
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "role": "SEO",
-                    "company": "SS",
-                    "email": "John@gmail.com",
-                    "phone": "0501234569",
-                    "score": "-25"
-                },
-                {
-                    //"name": "node_3",
-                    "id": "2",
-                    "firstName": "Michael",
-                    "lastName": "Bergner",
-                    "role": "PM",
-                    "company": "SS",
-                    "email": "Michael@gmail.com",
-                    "phone": "0501234569",
-                    "score": "50"
-                },
-                {
-                    //"name": "node_4",
-                    "id": "3",
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "role": "Ingeneer",
-                    "company": "SS",
-                    "email": "John@gmail.com",
-                    "phone": "0501234569",
-                    "score": "0"
-                },
-                {
-                    //"name": "node_5",
-                    "id": "4",
-                    "firstName": "test5",
-                    "lastName": "test5",
-                    "role": "test5",
-                    "company": "test5",
-                    "email": "test@gmail.com",
-                    "phone": "0501234569",
-                    "score": "56"
-                },
-                {
-                    //"name": "node_6",
-                    "id": "5",
-                    "firstName": "test6",
-                    "lastName": "test6",
-                    "role": "test6",
-                    "company": "test6",
-                    "email": "test@gmail.com",
-                    "phone": "0501234569",
-                    "score": "56"
-                },
-                {
-                    //"name": "node_7",
-                    "id": "6",
-                    "firstName": "test7",
-                    "lastName": "test7",
-                    "role": "test7",
-                    "company": "test7",
-                    "email": "test@gmail.com",
-                    "phone": "0501234569",
-                    "score": "56"
-                },
-                {
-                    //"name": "node_8",
-                    "id": "7",
-                    "firstName": "test8",
-                    "lastName": "test8",
-                    "role": "test8",
-                    "company": "test8",
-                    "email": "test@gmail.com",
-                    "phone": "0501234569",
-                    "score": "56"
-                },
-                {
-                    //"name": "node_9",
-                    "id": "8",
-                    "firstName": "test9",
-                    "lastName": "test9",
-                    "role": "test9",
-                    "company": "test9",
-                    "email": "test@gmail.com",
-                    "phone": "0501234569",
-                    "score": "56"
-                },
-                {
-                    //"name": "node_10",
-                    "id": "9",
-                    "firstName": "test10",
-                    "lastName": "test10",
-                    "role": "test10",
-                    "company": "test10",
-                    "email": "test@gmail.com",
-                    "phone": "0501234569",
-                    "score": "56"
-                }
-            ]
+                    'name': node.name,
+                    'id': node.id,
+                    'firstName': node.firstName,
+                    'lastName': node.lastName,
+                    'role': node.role,
+                    'company': node.company,
+                    'email': node.email,
+                    'phone': node.phone,
+                    'score': node.score
+                });
         });
-        sys.addEdge('2','1');
-        sys.addEdge('4','2');
-        sys.addEdge('7','6');
-        sys.addEdge('0','3');
-        sys.addEdge('6','4');
-        sys.addEdge('2','8');
-        sys.addEdge('1','3');
-        sys.addEdge('5','4');
-        sys.addEdge('8','0');
-        sys.addEdge('8','0');
-        sys.addEdge('9','1');
+
+        console.warn('data.edges', data.edges);
+        _.forEach(data.edges, function(edge) {
+            console.warn('edge', edge);
+            sys.addEdge(edge.src,edge.dest); //добавляем грань
+        });
+
     }
 
     function stakeholdersGraphFn() {
         return {
             restrict: 'AC',
-            //bindToController: true,
             scope: {},
             controller: function ($scope, $http, dataManipulation) {
-                $scope.placeholders = dataManipulation.placeholder;
+                const mockedNodes = dataManipulation.peoples;
+                const mockedEdges = dataManipulation.edges;
+                const edgesStorage = localStorage.getItem("edges");
+                const nodesStrorage = localStorage.getItem("nodes");
+                console.warn('GGGnodesGGG', nodesStrorage);
+                console.warn('GGGedgesGGG', edgesStorage);
+                $scope.nodes =  nodesStrorage ? JSON.parse(nodesStrorage) : mockedNodes;
+                $scope.edges =edgesStorage ? JSON.parse(edgesStorage) : mockedEdges;
             },
             link: function(scope, element, attrs) {
-                drawGraph(element[0], scope.placeholders);
+                drawGraph(element[0], scope);
             }
         }
     }

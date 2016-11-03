@@ -1,20 +1,17 @@
-import mockedData from './peoples.json'
+//import mockedData from './peoples.json'
 export default function ($scope, $http, dataManipulation) {
-    this.dataManipulation = dataManipulation.placeholder;
+    //this.dataManipulation = dataManipulation.placeholder;
 
+    const mockedData = dataManipulation;
     const stakeholders = localStorage.getItem("peoples");
-    this.model = stakeholders ? JSON.parse(stakeholders) : mockedData;
-    //this.model = $http.get('/peoples.json')
-    //    .then(function(res){
-    //        $scope.peoples = res.data;
-    //    });
-    console.warn('this.model.peoples', this.model.peoples);
+    console.warn('stakeholders', stakeholders);
+    //console.warn('mockedData', mockedData);
+
+    this.model = stakeholders ? JSON.parse(stakeholders) : mockedData;//если localStorage
 
     this.addRow = function(){
-        //console.warn('this.model.peoples.firstName', _.isEmpty(this.model.peoples.firstName));
-        const newId = this.model.peoples.length + 1;
+        const newId = this.model.peoples.length;
 
-        console.warn('this.model.peoples', this.model.peoples);
         this.model.peoples.push({
             "name": "node" + "_" + newId,
             "id": newId,
@@ -34,7 +31,9 @@ export default function ($scope, $http, dataManipulation) {
         this.model.peoples.phone='';
         this.model.peoples.score='';
         localStorage.setItem('peoples', JSON.stringify(this.model));
+        localStorage.setItem('nodes', JSON.stringify(this.model.peoples));
     };
+
     this.addEdge = function(){
         this.model.edges.push({
             "src": this.model.edges.src,
@@ -43,7 +42,9 @@ export default function ($scope, $http, dataManipulation) {
         console.warn('this.model.edges', this.model.edges);
         this.model.edges.src = '';
         this.model.edges.dest = '';
+        localStorage.setItem('edges', JSON.stringify(this.model.edges));
     };
+
     this.removeRow = function(firstName){
         let index = -1;
         let comArr = eval( this.model.peoples );
@@ -57,13 +58,17 @@ export default function ($scope, $http, dataManipulation) {
             alert( "Something gone wrong" );
         }
         this.model.peoples.splice( index, 1 );
+        localStorage.setItem('peoples', JSON.stringify(this.model));
+        localStorage.setItem('nodes', JSON.stringify(this.model.peoples));
     };
+
     this.getTemplate = function (person) {
         if (person.id === this.model.selected.id) {
             return 'edit'
         }
         return 'display';
     };
+
     this.editPerson = function (person) {
         console.warn('this.model.selected', this.model.selected);
         this.model.selected = angular.copy(person);
@@ -73,6 +78,8 @@ export default function ($scope, $http, dataManipulation) {
         console.warn("Saving contact");
         this.model.peoples[idx] = angular.copy(this.model.selected);
         this.reset();
+        localStorage.setItem('peoples', JSON.stringify(this.model));
+        localStorage.setItem('nodes', JSON.stringify(this.model.peoples));
     };
 
     this.reset = function () {
