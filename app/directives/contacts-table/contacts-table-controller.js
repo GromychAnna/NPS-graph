@@ -2,12 +2,8 @@
 export default function ($scope, $http, dataManipulation) {
     //this.dataManipulation = dataManipulation.placeholder;
 
-    const mockedData = dataManipulation;
-    const stakeholders = localStorage.getItem("peoples");
-    console.warn('stakeholders', stakeholders);
-    //console.warn('mockedData', mockedData);
-
-    this.model = stakeholders ? JSON.parse(stakeholders) : mockedData;//если localStorage
+    const factoryData = dataManipulation.dataManipulationObj;
+    this.model = factoryData;//если localStorage
 
     this.addRow = function(){
         const newId = this.model.peoples.length;
@@ -31,7 +27,6 @@ export default function ($scope, $http, dataManipulation) {
         this.model.peoples.phone='';
         this.model.peoples.score='';
         localStorage.setItem('peoples', JSON.stringify(this.model));
-        localStorage.setItem('nodes', JSON.stringify(this.model.peoples));
     };
 
     this.addEdge = function(){
@@ -42,7 +37,7 @@ export default function ($scope, $http, dataManipulation) {
         console.warn('this.model.edges', this.model.edges);
         this.model.edges.src = '';
         this.model.edges.dest = '';
-        localStorage.setItem('edges', JSON.stringify(this.model.edges));
+        localStorage.setItem('peoples', JSON.stringify(this.model));
     };
 
     this.removeRow = function(firstName){
@@ -59,7 +54,6 @@ export default function ($scope, $http, dataManipulation) {
         }
         this.model.peoples.splice( index, 1 );
         localStorage.setItem('peoples', JSON.stringify(this.model));
-        localStorage.setItem('nodes', JSON.stringify(this.model.peoples));
     };
 
     this.getTemplate = function (person) {
@@ -79,7 +73,6 @@ export default function ($scope, $http, dataManipulation) {
         this.model.peoples[idx] = angular.copy(this.model.selected);
         this.reset();
         localStorage.setItem('peoples', JSON.stringify(this.model));
-        localStorage.setItem('nodes', JSON.stringify(this.model.peoples));
     };
 
     this.reset = function () {

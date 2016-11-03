@@ -126,14 +126,10 @@ export default ngModule => {
             restrict: 'AC',
             scope: {},
             controller: function ($scope, $http, dataManipulation) {
-                const mockedNodes = dataManipulation.peoples;
-                const mockedEdges = dataManipulation.edges;
-                const edgesStorage = localStorage.getItem("edges");
-                const nodesStrorage = localStorage.getItem("nodes");
-                console.warn('GGGnodesGGG', nodesStrorage);
-                console.warn('GGGedgesGGG', edgesStorage);
-                $scope.nodes =  nodesStrorage ? JSON.parse(nodesStrorage) : mockedNodes;
-                $scope.edges =edgesStorage ? JSON.parse(edgesStorage) : mockedEdges;
+                const factoryNodes = dataManipulation.dataManipulationObj.peoples;
+                const factoryEdges = dataManipulation.dataManipulationObj.edges;
+                $scope.nodes =  factoryNodes;
+                $scope.edges = factoryEdges;
             },
             link: function(scope, element, attrs) {
                 drawGraph(element[0], scope);

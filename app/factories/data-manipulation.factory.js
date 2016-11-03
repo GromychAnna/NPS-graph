@@ -1,7 +1,7 @@
 export default ngModule => {
     ngModule.factory('dataManipulation', dataManipulationFn);
     function dataManipulationFn () {
-        return {
+        const mockedData = {
             peoples: [
                 {
                     "name": "node_0",
@@ -66,6 +66,11 @@ export default ngModule => {
                 {"src": "0", "dest": "4"}
             ],
             selected: {}
+        };
+        const stakeholders = localStorage.getItem("peoples");
+        const dataManipulationObj = stakeholders ? JSON.parse(stakeholders) : mockedData;
+        return {
+            dataManipulationObj
         }
     };
 }
