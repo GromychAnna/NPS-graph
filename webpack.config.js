@@ -7,8 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   context: path.resolve(__dirname, 'app'),
   entry: [
-      './index.js',
-      './main.js'
+      './index.js'
   ],
   devtool: 'inline-source-map',
   output: {
@@ -75,8 +74,8 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.ProvidePlugin({
-      $: "../node_modules/jquery/dist/jquery.min.js",
-      jQuery: "../node_modules/jquery/dist/jquery.min.js"
+      $: "jqery",
+      jQuery: "jqery"
       //"window.jQuery": "./node_modules/jquery/dist/jquery.min.js"
       //$: "jquery",
       //jQuery: "jquery",

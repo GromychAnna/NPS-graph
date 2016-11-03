@@ -1,5 +1,13 @@
-<!--<canvas width="960" height="600"></canvas>-->
-<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+<!--<input type="text" ng-model="ctrl.dataManipulation">-->
+
+
+
+
+
+
+
+<!--&lt;!&ndash;<canvas width="960" height="600"></canvas>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="https://d3js.org/d3.v4.min.js"></script>&ndash;&gt;-->
 <style>
   .action {
     width: 150px;
@@ -101,7 +109,7 @@
         <th>Score</th>
         <th class="action">Action</th>
       </tr>
-      <tr ng-repeat="person in ctrl.model.peoples" ng-include="ctrl.getTemplate(person)">
+      <tr ng-repeat="person in ctrl.model.peoples track by $index" ng-include="ctrl.getTemplate(person)">
       </tr>
     </table>
     <script type="text/ng-template" id="display">

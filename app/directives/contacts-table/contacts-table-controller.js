@@ -1,6 +1,9 @@
-import peoples from './peoples.json'
-export default function ($scope, $http) {
-    this.model = peoples;
+import mockedData from './peoples.json'
+export default function ($scope, $http, dataManipulation) {
+    this.dataManipulation = dataManipulation.placeholder;
+
+    const stakeholders = localStorage.getItem("peoples");
+    this.model = stakeholders ? JSON.parse(stakeholders) : mockedData;
     //this.model = $http.get('/peoples.json')
     //    .then(function(res){
     //        $scope.peoples = res.data;
@@ -30,6 +33,7 @@ export default function ($scope, $http) {
         this.model.peoples.email='';
         this.model.peoples.phone='';
         this.model.peoples.score='';
+        localStorage.setItem('peoples', JSON.stringify(this.model));
     };
     this.addEdge = function(){
         this.model.edges.push({

@@ -8,7 +8,7 @@
       "role": "Ingeneer",
       "company": "SS",
       "email": "Adele@gmail.com",
-      "phone": "0501234569",
+      "phone": "0501234565",
       "score": "25"
     },
     {
@@ -19,7 +19,7 @@
       "role": "SEO",
       "company": "SS",
       "email": "John@gmail.com",
-      "phone": "0501234569",
+      "phone": "0501234564",
       "score": "-25"
     },
     {
@@ -30,7 +30,7 @@
       "role": "PM",
       "company": "SS",
       "email": "Michael@gmail.com",
-      "phone": "0501234569",
+      "phone": "0501234563",
       "score": "50"
     },
     {
@@ -41,7 +41,7 @@
       "role": "Ingeneer",
       "company": "SS",
       "email": "John@gmail.com",
-      "phone": "0501234569",
+      "phone": "0501234562",
       "score": "0"
     },
     {
@@ -52,62 +52,7 @@
       "role": "test5",
       "company": "test5",
       "email": "test@gmail.com",
-      "phone": "0501234569",
-      "score": "56"
-    },
-    {
-      "name": "node_6",
-      "id": "6",
-      "firstName": "test6",
-      "lastName": "test6",
-      "role": "test6",
-      "company": "test6",
-      "email": "test@gmail.com",
-      "phone": "0501234569",
-      "score": "56"
-    },
-    {
-      "name": "node_7",
-      "id": "7",
-      "firstName": "test7",
-      "lastName": "test7",
-      "role": "test7",
-      "company": "test7",
-      "email": "test@gmail.com",
-      "phone": "0501234569",
-      "score": "56"
-    },
-    {
-      "name": "node_8",
-      "id": "8",
-      "firstName": "test8",
-      "lastName": "test8",
-      "role": "test8",
-      "company": "test8",
-      "email": "test@gmail.com",
-      "phone": "0501234569",
-      "score": "56"
-    },
-    {
-      "name": "node_9",
-      "id": "9",
-      "firstName": "test9",
-      "lastName": "test9",
-      "role": "test9",
-      "company": "test9",
-      "email": "test@gmail.com",
-      "phone": "0501234569",
-      "score": "56"
-    },
-    {
-      "name": "node_10",
-      "id": "10",
-      "firstName": "test10",
-      "lastName": "test10",
-      "role": "test10",
-      "company": "test10",
-      "email": "test@gmail.com",
-      "phone": "0501234569",
+      "phone": "0501234561",
       "score": "56"
     }
   ],
