@@ -24,43 +24,43 @@
       <div class="form-group">
         <label class="col-md-4 control-label">First Name</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="firstName" ng-model="ctrl.model.peoples.firstName" />
+          <input type="text" required class="form-control" name="firstName" ng-model="ctrl.model.peoples.firstName" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Last Name</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="lastName" ng-model="ctrl.model.peoples.lastName" />
+          <input type="text" required class="form-control" name="lastName" ng-model="ctrl.model.peoples.lastName" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Role</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="role" ng-model="ctrl.model.peoples.role" />
+          <input type="text" required class="form-control" name="role" ng-model="ctrl.model.peoples.role" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Company</label>
         <div class="col-md-8">
-          <input type="text" class="form-control" name="company" ng-model="ctrl.model.peoples.company" />
+          <input type="text" required class="form-control" name="company" ng-model="ctrl.model.peoples.company" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Email</label>
         <div class="col-md-8">
-          <input type="email" class="form-control" name="email" ng-model="ctrl.model.peoples.email" />
+          <input type="email" required class="form-control" name="email" ng-model="ctrl.model.peoples.email" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Phone</label>
         <div class="col-md-8">
-          <input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' class="form-control" name="phone" ng-model="ctrl.model.peoples.phone" />
+          <input type='tel' required pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' class="form-control" name="phone" ng-model="ctrl.model.peoples.phone" />
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-4 control-label">Score</label>
         <div class="col-md-8">
-          <input type="number" min="-100" max="100" class="form-control" name="score" ng-model="ctrl.model.peoples.score" />
+          <input type="number" required min="-100" max="100" class="form-control" name="score" ng-model="ctrl.model.peoples.score" />
         </div>
       </div>
       <div class="form-group">
@@ -78,7 +78,7 @@
       </select>
       <label for="stakeholder2" class="col-md-12 stakeholder"> 2nd stakeholder </label>
       <select class="form-control col-md-12" name="stakeholder2" id="stakeholder2" ng-model="ctrl.model.edges.dest">
-        <option ng-repeat="option in ctrl.model.peoples track by $index" value="{{option.id}}">{{option.firstName}}</option>
+        <option ng-repeat="option in ctrl.model.peoples" value="{{option.id}}">{{option.firstName}}</option>
       </select>
       <div class="form-group">
         <div style="padding-left:110px">
@@ -119,13 +119,13 @@
       </td>
     </script>
     <script type="text/ng-template" id="edit">
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.firstName" /></td>
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.lastName" /></td>
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.role" /></td>
-      <td><input type="text" class="form-control" ng-model="ctrl.model.selected.company" /></td>
-      <td><input type="email" class="form-control" ng-model="ctrl.model.selected.email" /></td>
-      <td><input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)' class="form-control" ng-model="ctrl.model.selected.phone" /></td>
-      <td><input type="number" min="-100" max="100" class="form-control" ng-model="ctrl.model.selected.score" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.firstName" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.lastName" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.role" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.company" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.email" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.phone" /></td>
+      <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.score" /></td>
       <td class="action">
         <button type="button" class="btn btn-primary" ng-click="ctrl.savePerson($index)">Save</button>
         <button type="button" class="btn btn-primary" ng-click="ctrl.reset()">Cancel</button>

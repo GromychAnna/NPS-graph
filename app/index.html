@@ -6,11 +6,76 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<style>
+  canvas{
+    width: 800px;
+    height: 600px;
+  }
+  body{
+    margin:0;
+    padding:20px;
+    font:12px/17px Arial, sans-serif;
+    background:#f9f9f9;
+  }
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+
   <h1>NPS system</h1>
   <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
   <script src="bundle.js"></script>
 
+  <button id="myBtn" class="hidden">Open Modal</button>
+  <div id="myModal" class="modal">
 
+    <div class="modal-content">
+      <span class="close">×</span>
+      <h2 id="modal-text">Node information:</h2>
+      <p id="firstName">First name: </p>
+      <p id="lastName">Last name: </p>
+      <p id="role">Role: </p>
+      <p id="company">Company: </p>
+      <p id="email">E-mail: </p>
+      <p id="phone">Phone: </p>
+      <p id="score">Score: </p>
+    </div>
+
+  </div>
 
   <canvas stakeholders-graph width="800" height="600"></canvas>
 
@@ -18,14 +83,6 @@
   <!--<script src="app/jquery/dist/jquery.min.js"></script>-->
   <script src="arbor/lib/arbor.js"></script>
   <!--<script src="main.js"></script>-->
-  <style>
-    body{
-      margin:0;
-      padding:20px;
-      font:12px/17px Arial, sans-serif;
-      background:#f9f9f9;
-    }
-  </style>
 
 
   <contacts-table></contacts-table>

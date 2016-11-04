@@ -1,6 +1,4 @@
-//import mockedData from './peoples.json'
 export default function ($scope, $http, dataManipulation) {
-    //this.dataManipulation = dataManipulation.placeholder;
 
     const factoryData = dataManipulation.dataManipulationObj;
     this.model = factoryData;//если localStorage
@@ -18,7 +16,6 @@ export default function ($scope, $http, dataManipulation) {
             "email": this.model.peoples.email,
             "phone": this.model.peoples.phone,
             "score": this.model.peoples.score });
-        console.warn('this.model.peoples', this.model.peoples);
         this.model.peoples.firstName='';
         this.model.peoples.lastName='';
         this.model.peoples.role='';
@@ -64,12 +61,10 @@ export default function ($scope, $http, dataManipulation) {
     };
 
     this.editPerson = function (person) {
-        console.warn('this.model.selected', this.model.selected);
         this.model.selected = angular.copy(person);
     };
 
     this.savePerson = function (idx) {
-        console.warn("Saving contact");
         this.model.peoples[idx] = angular.copy(this.model.selected);
         this.reset();
         localStorage.setItem('peoples', JSON.stringify(this.model));
