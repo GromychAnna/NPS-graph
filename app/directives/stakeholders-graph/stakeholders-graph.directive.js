@@ -90,7 +90,6 @@ export default ngModule => {
                             }
                         }
                         var showModal = document.getElementById('myBtn');
-                        console.warn('showModal', showModal);
                         showModal.click();
 
                         var firstName = document.getElementById('firstName');
@@ -162,14 +161,13 @@ export default ngModule => {
 
     }
 
-    function stakeholdersGraphFn() {console.warn('stakeholdersGraphFn');
+    function stakeholdersGraphFn() {
         return {
             restrict: 'AC',
             scope: {},
             controllerAs: 'ctrl',
-            controller: require('./stakeholders-graph-controller'),
+            controller: require('./stakeholders-graph.controller'),
             link: function(scope, element, attrs) {
-                console.warn(scope);
                 drawGraph(element[0], scope);
             }
         }
