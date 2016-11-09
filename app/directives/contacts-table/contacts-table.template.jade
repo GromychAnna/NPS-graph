@@ -1,3 +1,83 @@
-.hello-world
-    //{{vm.greeting}}
-    h1 wowowow
+.row
+    .col-md-4
+        form.form-horizontal.col-md-12(role='form', name='addStakeholderForm', ng-submit='ctrl.addRow()')
+            h2 Add stakeholder
+            .form-group
+                label.col-md-4.control-label First Name
+                .col-md-8
+                    input.form-control(type='text', required='', name='firstName', ng-model='ctrl.model.peoples.firstName')
+            .form-group
+                label.col-md-4.control-label Last Name
+                .col-md-8
+                    input.form-control(type='text', required='', name='lastName', ng-model='ctrl.model.peoples.lastName')
+            .form-group
+                label.col-md-4.control-label Role
+                .col-md-8
+                    input.form-control(type='text', required='', name='role', ng-model='ctrl.model.peoples.role')
+            .form-group
+                label.col-md-4.control-label Company
+                .col-md-8
+                    input.form-control(type='text', required='', name='company', ng-model='ctrl.model.peoples.company')
+            .form-group
+                label.col-md-4.control-label Email
+                .col-md-8
+                    input.form-control(type='email', required='', name='email', ng-model='ctrl.model.peoples.email')
+            .form-group
+                label.col-md-4.control-label Phone
+                .col-md-8
+                    input.form-control(type='tel', required='', pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}', title='Phone Number (Format: +99(99)9999-9999)', name='phone', ng-model='ctrl.model.peoples.phone')
+            .form-group
+                label.col-md-4.control-label Score
+                .col-md-8
+                    input.form-control(type='number', required='', min='-100', max='100', name='score', ng-model='ctrl.model.peoples.score')
+            .form-group
+                div(style='padding-left:110px')
+                    input.btn.btn-primary.add-row-btn(type='submit', value='Submit')
+        form.form-horizontal.col-md-12(role='form', name='addEdgeForm', ng-submit='ctrl.addEdge()')
+            h2 Create connection between:
+            label.col-md-12.stakeholder(for='stakeholder1')  1st stakeholder
+            select#stakeholder1.form-control.col-md-12(name='stakeholder1', ng-model='ctrl.model.edges.src')
+                option(ng-repeat='option in ctrl.model.peoples track by $index', value='{{option.id}}') {{option.firstName}}
+            label.col-md-12.stakeholder(for='stakeholder2')  2nd stakeholder
+            select#stakeholder2.form-control.col-md-12(name='stakeholder2', ng-model='ctrl.model.edges.dest')
+                option(ng-repeat='option in ctrl.model.peoples', value='{{option.id}}') {{option.firstName}}
+            .form-group
+                div(style='padding-left:110px')
+                    input.btn.btn-primary.add-age-btn(type='submit', value='Submit')
+    h2 Stakeholders
+    .col-md-7
+        table.table
+            tr
+                th First Name
+                th Last Name
+                th Role
+                th Company
+                th Email
+                th Phone
+                th Score
+                th.action Action
+            tr(ng-repeat='person in ctrl.model.peoples track by $index', ng-include='ctrl.getTemplate(person)')
+        script#display(type='text/ng-template').
+            <td ng-bind="person.firstName"></td>
+            <td ng-bind="person.lastName"></td>
+            <td ng-bind="person.role"></td>
+            <td ng-bind="person.company"></td>
+            <td ng-bind="person.email"></td>
+            <td ng-bind="person.phone"></td>
+            <td ng-bind="person.score"></td>
+            <td class="action">
+            <input type="button" value="Edit" class="btn btn-primary" ng-click="ctrl.editPerson(person)"/>
+            <input type="button" value="Remove" class="btn btn-primary" ng-click="ctrl.removeRow(person.firstName)"/>
+            </td>
+        script#edit(type='text/ng-template').
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.firstName" /></td>
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.lastName" /></td>
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.role" /></td>
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.company" /></td>
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.email" /></td>
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.phone" /></td>
+            <td><input required type="text" class="form-control" ng-model="ctrl.model.selected.score" /></td>
+            <td class="action">
+            <button type="button" class="btn btn-primary" ng-click="ctrl.savePerson($index)">Save</button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.reset()">Cancel</button>
+            </td>

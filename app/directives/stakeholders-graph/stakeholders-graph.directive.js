@@ -88,7 +88,7 @@ export default ngModule => {
                             if (event.target == modal) {
                                 modal.style.display = "none";
                             }
-                        }
+                        };
                         var showModal = document.getElementById('myBtn');
                         showModal.click();
 
