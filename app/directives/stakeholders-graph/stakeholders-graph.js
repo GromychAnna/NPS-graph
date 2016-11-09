@@ -19,7 +19,6 @@ export default ngModule => {
 
                 particleSystem.eachEdge(                                                                //отрисуем каждую грань
                     function(edge, pt1, pt2){                                                           //будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}//console.warn('EDGE', data);
-                        //console.warn('EDGE', edge);
                         ctx.strokeStyle = "rgba(0,0,0, .333)";                                          //грани будут чёрным цветом с некой прозрачностью
                         ctx.lineWidth = 1;
                         ctx.beginPath();//начинаем рисовать
@@ -36,7 +35,6 @@ export default ngModule => {
                         ctx.fillStyle = "black";                                                        //цвет для шрифта
 
                         ctx.font = 'italic 13px sans-serif';                                            //шрифт
-                        //ctx.stroke();
                         ctx.fillText (node.data.firstName, pt.x+8, pt.y+8);                             //пишем имя у каждой точки
                     })
             },
@@ -118,7 +116,7 @@ export default ngModule => {
 
 
                         dragged = null;                                                                 //очищаем
-                        canvas.addEventListener('mousemove', handler.dragged);                                      //слушаем события перемещения мыши
+                        canvas.addEventListener('mousemove', handler.dragged);                          //слушаем события перемещения мыши
                         window.addEventListener('mouseup', handler.dropped);
                         var _mouseP = null;
                         return false
@@ -126,7 +124,7 @@ export default ngModule => {
 
                     ondblclick :function(e){
                         alert("Hello");
-                        canvas.addEventListener('ondblclick', handler.dragged);                                      //слушаем события перемещения мыши
+                        canvas.addEventListener('ondblclick', handler.dragged);                         //слушаем события перемещения мыши
                         window.addEventListener('ondblclick', handler.dropped);
                         return false
                     }
@@ -159,7 +157,7 @@ export default ngModule => {
         });
 
         _.forEach(data.edges, function(edge) {
-            sys.addEdge(edge.src,edge.dest); //добавляем грань
+            sys.addEdge(edge.src,edge.dest);                                                            //добавляем грань
         });
 
     }
@@ -168,7 +166,6 @@ export default ngModule => {
         return {
             restrict: 'AC',
             scope: {},
-            template: require('./for-modal-window.html'),
             controllerAs: 'ctrl',
             controller: require('./stakeholders-graph-controller'),
             link: function(scope, element, attrs) {
