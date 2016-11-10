@@ -4,3 +4,4 @@ const ngModule = angular.module('app',[]); // берём с html ангуляр�
 
 require('./directives')(ngModule); //говорим, что всё, что лежит в папке directives - подключим сюда
 require('./factories')(ngModule);
+//require('./index.jade');
