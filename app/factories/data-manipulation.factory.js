@@ -159,15 +159,20 @@ export default ngModule => {
         ];
 
         let edges = [
-            {"src": "0", "dest": "1"},
-            {"src": "4", "dest": "2"},
-            {"src": "3", "dest": "4"},
-            {"src": "0", "dest": "4"}
+            //{"src": "0", "dest": "1"},
+            //{"src": "4", "dest": "2"},
+            //{"src": "3", "dest": "4"},
+            //{"src": "0", "dest": "4"}
+        ];
+        const edgeTypes = [
+            {"name": "Reports to"},
+            {"name": "Peer"}
         ];
 
         return {
             stakeholders: storedStakeholders ? JSON.parse(storedStakeholders) : stakeholders,
             edges: storedEdges ?  JSON.parse(storedEdges) : edges,
+            edgeTypes,
             getStoredData,
             storeData
         };

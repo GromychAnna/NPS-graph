@@ -2,10 +2,15 @@ export default class AddEdgesCtrl {
     constructor(dataStorage){
         this.dataStorage = dataStorage;
         this.edge = this.getDefaultValue();
+        //this.edgeTypes = this.edgeTypes;
     }
 
     get stakeholdersList () {
         return this.dataStorage.stakeholders;
+    }
+
+    get edgeTypes () {
+        return this.dataStorage.edgeTypes;
     }
 
     getDefaultValue () {
