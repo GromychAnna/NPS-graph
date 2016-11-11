@@ -1,0 +1,49 @@
+canvas(stakeholders-graph,
+stakeholders='$ctrl.dataStorage.stakeholders',
+edges='$ctrl.dataStorage.edges',
+width="800", height="600")
+
+h2.text-center Stakeholders
+table.table.col-xs-7(style="margin: 0 auto;")
+    tr
+        th First Name
+        th Last Name
+        th Role
+        th Company
+        th Email
+        th Phone
+        th Score
+        th.action Action
+    tr(ng-repeat='stakeholder in $ctrl.dataStorage.stakeholders track by $index')
+        td
+            p(ng-bind='stakeholder.firstName', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.firstName', ng-if="stakeholder.editable")
+        td
+            p(ng-bind='stakeholder.lastName', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.lastName', ng-if="stakeholder.editable")
+        td
+            p(ng-bind='stakeholder.role', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.role', ng-if="stakeholder.editable")
+        td
+            p(ng-bind='stakeholder.company', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.company', ng-if="stakeholder.editable")
+        td
+            p(ng-bind='stakeholder.email', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.email', ng-if="stakeholder.editable")
+        td
+            p(ng-bind='stakeholder.phone', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.phone', ng-if="stakeholder.editable")
+        td
+            p(ng-bind='stakeholder.score', ng-if="!stakeholder.editable")
+            input.form-control(required='', type='text', ng-model='$ctrl.selectedStakeholder.score', ng-if="stakeholder.editable")
+        td
+            .action.for-view-mode(ng-if="!stakeholder.editable")
+                button.btn.btn-primary(ng-click='$ctrl.editStakeholder(stakeholder)')
+                    | Edit
+                button.btn.btn-primary(ng-click='$ctrl.removeStakeholder($index)')
+                    | Remove
+            .action.for-edit-mode(ng-if="stakeholder.editable")
+                button.btn.btn-primary(type='button', ng-click='$ctrl.saveChanges($index)')
+                    | Save
+                button.btn.btn-primary(type='button', ng-click='$ctrl.rejectChanges(stakeholder)')
+                    | Cancel
