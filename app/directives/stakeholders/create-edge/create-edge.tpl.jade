@@ -3,18 +3,23 @@ form.form-horizontal(role='form', name='addEdgeForm', ng-submit='$ctrl.addEdge()
     label.col-md-12.stakeholder(for='edgeTypes')  Select edge type
     select#edgeTypes.form-control.col-md-12(
         name='stakeholder1',
-        ng-model='$ctrl.edge.edgeType')
+        ng-model='$ctrl.edge.edgeType',
+        ng-change='$ctrl.change()')
             option(ng-repeat='option in $ctrl.edgeTypes',
             value='{{option.name}}',
             ng-bind="option.name")
-    label.col-md-12.stakeholder(for='stakeholder1')  1st stakeholder
+    label.col-md-12.stakeholder(
+        ng-bind='$ctrl.firstStakeholder'
+        for='stakeholder1')
     select#stakeholder1.form-control.col-md-12(
         name='stakeholder1',
         ng-model='$ctrl.edge.src')
         option(ng-repeat='option in $ctrl.stakeholdersList track by $index',
                value='{{option.id}}',
                ng-bind="option.firstName")
-    label.col-md-12.stakeholder(for='stakeholder2')  2nd stakeholder
+    label.col-md-12.stakeholder(
+        ng-bind='$ctrl.secondStakeholder',
+        for='stakeholder2')
     select#stakeholder2.form-control.col-md-12(
         name='stakeholder2',
         ng-model='$ctrl.edge.dest')

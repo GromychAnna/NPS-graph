@@ -166,7 +166,8 @@ export default ngModule => {
             restrict: 'AC',
             scope: {
                 stakeholders: '=',
-                edges: '='
+                edges: '=',
+                edgeTypes: '='
             },
             link: (scope, element, attrs) => {
                 //debugger

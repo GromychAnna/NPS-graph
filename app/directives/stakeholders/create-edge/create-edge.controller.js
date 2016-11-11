@@ -2,7 +2,8 @@ export default class AddEdgesCtrl {
     constructor(dataStorage){
         this.dataStorage = dataStorage;
         this.edge = this.getDefaultValue();
-        //this.edgeTypes = this.edgeTypes;
+        this.firstStakeholder = '1st stakeholder';
+        this.secondStakeholder = '2nd stakeholder';
     }
 
     get stakeholdersList () {
@@ -11,6 +12,16 @@ export default class AddEdgesCtrl {
 
     get edgeTypes () {
         return this.dataStorage.edgeTypes;
+    }
+
+    change () {
+        if(_.isEqual(this.edge.edgeType, "Reports to")) {
+            this.firstStakeholder = 'Reporter';
+            this.secondStakeholder = 'Manager';
+        } else {
+            this.firstStakeholder = '1st stakeholder';
+            this.secondStakeholder = '2nd stakeholder';
+        }
     }
 
     getDefaultValue () {
