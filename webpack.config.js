@@ -1,4 +1,3 @@
-const scaleLinear = require('d3-scale');
 const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
@@ -6,37 +5,34 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname, 'app'),
-  entry: [
-      './index.js'
-  ],
+  entry: {
+    node_modules: Object.keys(require('./package.json').dependencies),
+    app: './index.js'
+  },
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'app'),
-    filename: './bundle.js'
+    filename: './[name]_bundle.js'
   },
 
   watch: true,
   watchPoll: true,
   watchOptions: {
-    ignored: /(node_modules|vendor_libs)/,
+    ignored: /node_modules/,
     aggregateTimeout: 300,
     poll: 500
   },
   devServer: {
     watchPoll: true,
     watchOptions: {
-      ignored: /(node_modules|vendor_libs)/,
+      ignored: /node_modules/,
       aggregateTimeout: 300,
       poll: 500
     }
   },
   resolve: {
     modulesDirectories: [ 'node_modules'],
-    extensions: [ '', '.js', '.jade', '.css', '.sass', '.scss', '.json' ],
-    alias: {
-      jquery: '../node_modules/jquery/dist/jquery.min.js'
-      //jquery: './jquery/dist/jquery.min.js'   //-  Cannot resolve 'file' or 'directory' ./jquery/dist/jquery.min.js
-    }
+    extensions: [ '', '.js', '.jade', '.css', '.sass', '.scss', '.json' ]
   },
 
   module: {
@@ -54,8 +50,8 @@ module.exports = {
         loader: 'raw'
       },
       {
-        test: /\.jade$/,
-        loader: 'jade-loader'
+        test: /\.tpl\.jade$/,
+        loader: 'ng-cache!jade-html'
       },
       {
         test: /\.css$/,
@@ -74,12 +70,10 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('[name].styles.css'),
     new webpack.ProvidePlugin({
-      $: "jqery",
-      jQuery: "jqery"
-      //"window.jQuery": "./node_modules/jquery/dist/jquery.min.js"
-      //$: "jquery",
-      //jQuery: "jquery",
-      //"window.jQuery": "jquery"
+        '_': 'lodash',
+        '$': 'jquery',
+        'jQuery': 'jquery',
+        'window.jQuery': 'jquery'
     })
   ],
   'postcss': [

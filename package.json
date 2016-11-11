@@ -6,7 +6,8 @@
   "repository": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "start http://localhost:8080/webpack-dev-server/ & webpack-dev-server --content-base app",
+    "start": "start http://localhost:3000/webpack-dev-server/ & webpack-dev-server --port 3000 --content-base app",
+    //"start": "start http://localhost:8080/webpack-dev-server/ & webpack-dev-server --content-base app",
     "build": "NODE_ENV=production node node_modules/.bin/webpack && cp app/index.html dist/index.html"
   },
   "author": "Anna Gromuch",
@@ -20,25 +21,26 @@
     "css-loader": "^0.19.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
-    "jade": "^1.11.0",
+    "jade-html-loader": "0.0.3",
     "jade-loader": "^0.8.0",
-    "jqery": "^2.1.4",
-    "json-loader": "^0.5.4",
     "node-libs-browser": "^0.5.2",
     "node-sass": "^3.3.3",
     "postcss-loader": "^1.1.0",
     "raw-loader": "^0.5.1",
     "sass-loader": "^2.0.1",
-    "scss-loader": "^2.0.1",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "ng-cache-loader": "0.0.21",
+    "jade": "^1.11.0",
+    "json-loader": "^0.5.4"
   },
   "dependencies": {
     "angular": "1.5.8",
-    "jade": "^1.11.0",
-    "json-loader": "^0.5.4",
+    "angularfire": "^2.1.0",
+    "firebase": "^3.6.0",
+    "jquery": "^3.1.1",
     "lodash": "4.15.0"
   }
 }
