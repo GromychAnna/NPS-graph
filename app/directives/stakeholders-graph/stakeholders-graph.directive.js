@@ -136,7 +136,7 @@ export default ngModule => {
     }
 
     function drawGraph (element, stakeholders, edges) {
-        sys = arbor.ParticleSystem(1000, 600, 0.5);                                                 // create the system with sensible repulsion/stiffness/friction
+        sys = arbor.ParticleSystem(1000, 600, 0.5);                                                 // create-stakeholder the system with sensible repulsion/stiffness/friction
         sys.parameters({gravity:true});                                                                 // use center-gravity to make the graph settle nicely (ymmv)
         sys.renderer = renderer(element, {stakeholders, edges});                                                         // our newly created renderer will have its .init() method called shortly by sys...
 

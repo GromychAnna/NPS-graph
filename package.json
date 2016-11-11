@@ -6,8 +6,7 @@
   "repository": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "start http://localhost:3000/webpack-dev-server/ & webpack-dev-server --port 3000 --content-base app",
-    //"start": "start http://localhost:8080/webpack-dev-server/ & webpack-dev-server --content-base app",
+    "start": "start http://localhost:8080/webpack-dev-server/ & webpack-dev-server --content-base app",
     "build": "NODE_ENV=production node node_modules/.bin/webpack && cp app/index.html dist/index.html"
   },
   "author": "Anna Gromuch",
