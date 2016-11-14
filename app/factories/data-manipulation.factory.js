@@ -96,9 +96,10 @@
 //}
 export default ngModule => {
     ngModule.factory('dataStorage',  function () {
-        const KEYS_FOR_STORE = ['stakeholders', 'edges'];
+        const KEYS_FOR_STORE = ['stakeholders', 'edges', 'events'];
         const storedStakeholders = getStoredData(KEYS_FOR_STORE[0]);
         const storedEdges = getStoredData(KEYS_FOR_STORE[1]);
+        const storedEvent = getStoredData(KEYS_FOR_STORE[2]);
 
         let stakeholders = [
             {
@@ -169,9 +170,22 @@ export default ngModule => {
             {"name": "Peer"}
         ];
 
+        let events = [
+            {
+                "date": "25.09.2016",
+                "score": "10",
+                "stakeholders": [
+                    {"id": "0"},
+                    {"id": "1"},
+                    {"id": "2"}
+                ]
+            }
+        ];
+
         return {
             stakeholders: storedStakeholders ? JSON.parse(storedStakeholders) : stakeholders,
             edges: storedEdges ?  JSON.parse(storedEdges) : edges,
+            events: storedEvent ?  JSON.parse(storedEvent) : events,
             edgeTypes,
             getStoredData,
             storeData

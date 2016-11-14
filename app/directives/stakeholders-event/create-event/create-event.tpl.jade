@@ -1,32 +1,26 @@
-//form.form-horizontal(role='form', name='addStakeholderForm', ng-submit='$ctrl.createStakeholder()')
-//    h2.text-center Add stakeholder
-//    .form-group
-//        label.col-md-3.control-label First Name
-//        .col-md-8
-//            input.form-control(type='text', required='', name='firstName', ng-model='$ctrl.stakeholder.firstName')
-//    .form-group
-//        label.col-md-3.control-label Last Name
-//        .col-md-8
-//            input.form-control(type='text', required='', name='lastName', ng-model='$ctrl.stakeholder.lastName')
-//    .form-group
-//        label.col-md-3.control-label Role
-//        .col-md-8
-//            input.form-control(type='text', required='', name='role', ng-model='$ctrl.stakeholder.role')
-//    .form-group
-//        label.col-md-3.control-label Company
-//        .col-md-8
-//            input.form-control(type='text', required='', name='company', ng-model='$ctrl.stakeholder.company')
-//    .form-group
-//        label.col-md-3.control-label Email
-//        .col-md-8
-//            input.form-control(type='email', required='', name='email', ng-model='$ctrl.stakeholder.email')
-//    .form-group
-//        label.col-md-3.control-label Phone
-//        .col-md-8
-//            input.form-control(type='tel', required='', title='Phone Number (Format: +99(99)9999-9999)', name='phone', ng-model='$ctrl.stakeholder.phone')
-//    .form-group
-//        label.col-md-3.control-label Score
-//        .col-md-8
-//            input.form-control(type='number', required='', min='-100', max='100', name='score', ng-model='$ctrl.stakeholder.score')
-//    .form-group
-//        button.btn.btn-primary.col-md-offset-9(type='submit') Submit
+form.form-horizontal(role='form', name='addEventForm', ng-submit='$ctrl.createEvent()')
+    h2.text-center Add event
+    .form-group
+        label.col-md-3.control-label Date
+        .col-md-9
+            input.form-control(type='text', required='', name='date', ng-model='$ctrl.event.date')
+    .form-group
+        label.col-md-3.control-label Score
+        .col-md-9
+            input.form-control(type='text', required='', name='score', ng-model='$ctrl.event.score')
+    //.form-group
+    //    label.col-md-3.control-label Role
+    //    .col-md-8
+    //        input.form-control(type='text', required='', name='role', ng-model='$ctrl.stakeholder.role')
+    .form-group
+        label.col-md-3.stakeholder(for='stakeholders') Stakeholders
+        .col-md-9
+            select#stakeholders.form-control(
+            name='stakeholders',
+            ng-model='$ctrl.event.stakeholders')
+                option(ng-repeat='option in $ctrl.stakeholdersList track by $index',
+                value='{{option.id}}',
+                ng-bind="option.firstName")
+
+    .form-group
+        button.btn.btn-primary.col-md-offset-9(type='submit') Submit
