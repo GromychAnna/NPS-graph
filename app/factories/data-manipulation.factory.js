@@ -175,9 +175,19 @@ export default ngModule => {
                 "date": "25.09.2016",
                 "score": "10",
                 "stakeholders": [
-                    {"id": "0"},
-                    {"id": "1"},
-                    {"id": "2"}
+                    {
+                        "id": "0",
+                        "firstName": "Adele",
+                        "lastName": "Hargarden"},
+                    {
+                        "id": "1",
+                        "firstName": "Joan",
+                        "lastName": "Smith"},
+                    {
+                        "id": "2",
+                        "firstName": "Michael",
+                        "lastName": "Bergner"
+                    }
                 ]
             }
         ];

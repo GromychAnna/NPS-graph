@@ -1,9 +1,9 @@
 import './events-list.tpl.jade';
-import StakeholdersListCtrl from './events-list.controller.js';
+import EventListCtrl from './events-list.controller.js';
 
 export default ngModule => {
-  ngModule.component('stakeholdersList', {
+  ngModule.component('eventList', {
     templateUrl: 'events-list.tpl.jade',
-    controller: StakeholdersListCtrl
+    controller: EventListCtrl
   });
 }
