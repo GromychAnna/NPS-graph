@@ -17,16 +17,19 @@ export default class EventCreateCtrl {
     }
     createEvent () {
         let stakeholdersOnEvent = this.event.stakeholders.toString().split('},');
+        const eventScore = this.event.score;
         for (let iterator = 0; iterator < stakeholdersOnEvent.length - 1; iterator++) {
             stakeholdersOnEvent[iterator] = stakeholdersOnEvent[iterator] + "}";
         }
         for (let iterator = 0; iterator < stakeholdersOnEvent.length; iterator++) {
             stakeholdersOnEvent[iterator] = JSON.parse(stakeholdersOnEvent[iterator]);
-            console.log(stakeholdersOnEvent[iterator]);
+            const currentStakeholder = _.find(this.dataStorage.stakeholders, function(o) { return o.id === stakeholdersOnEvent[iterator].id; });
+            currentStakeholder.score = parseInt(currentStakeholder.score) + parseInt(eventScore);
         }
         this.event.stakeholders = stakeholdersOnEvent;
         this.dataStorage.events.push(this.event);
         this.dataStorage.storeData(this.dataStorage.events, 'events');
+        this.dataStorage.storeData(this.dataStorage.stakeholders, 'stakeholders');
         this.event = this.getDefaultValue();
     }
 }
