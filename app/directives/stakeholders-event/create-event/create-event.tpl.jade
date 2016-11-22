@@ -8,25 +8,17 @@ form.form-horizontal(role='form', name='addEventForm', ng-submit='$ctrl.createEv
         label.col-md-3.control-label Score
         .col-md-9
             input.form-control(type='text', required='', name='score', ng-model='$ctrl.event.score')
-    //.form-group
-    //    label.col-md-3.control-label Role
-    //    .col-md-8
-    //        input.form-control(type='text', required='', name='role', ng-model='$ctrl.event.stakeholders')
     .form-group
         label.col-md-3.stakeholder(for='stakeholders') Stakeholders
         .col-md-9
-
-            //#stakeholders(ng-dropdown-multiselect='' options='$ctrl.stakeholdersList' name='stakeholders' selected-model='$ctrl.event.stakeholders')
-
             select#stakeholders.form-control(
             name='stakeholders',
+            multiple,
             ng-dropdown-multiselect='',
             options='$ctrl.stakeholdersList',
-            selected-model='$ctrl.event.stakeholders')
-                //ng-model='$ctrl.event.stakeholders')
+            ng-model='$ctrl.event.stakeholders')
                 option(ng-repeat='option in $ctrl.stakeholdersList track by $index',
-                value='{{option.id}}',
+                value='{{option}}',
                 ng-bind="option.firstName")
-
     .form-group
         button.btn.btn-primary.col-md-offset-9(type='submit') Submit

@@ -1,11 +1,16 @@
 h2.text-center Events history
 
+input.form-control.ng-pristine.ng-valid(type="text" ng-model='searchKeyword')
+
 table.table.col-xs-7(style="margin: 0 auto;")
     tr
-        th Date
-        th Score
-        th Stakeholders
-    tr(ng-repeat='event in $ctrl.dataStorage.events track by $index')
+        th
+            a(href="" ng-click="orderByField='name'; reverseSort = !reverseSort") Date
+        th
+            a(href="" ng-click="orderByField='name'; reverseSort = !reverseSort") Score
+        th
+            a(href="" ng-click="orderByField='name'; reverseSort = !reverseSort") Stakeholders
+    tr(ng-repeat='event in $ctrl.dataStorage.events | filter: searchKeyword | orderBy:orderByField:reverseSort track by $index ')
         td
             p(ng-bind='event.date')
         td
@@ -13,4 +18,3 @@ table.table.col-xs-7(style="margin: 0 auto;")
         td
             div(ng-repeat='stakeholder in event.stakeholders track by $index')
                 p(ng-bind='stakeholder.firstName')
-
