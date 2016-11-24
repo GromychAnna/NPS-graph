@@ -30,12 +30,15 @@ export default ngModule => {
                 particleSystem.eachNode(                                                                //теперь каждую вершину
                     (node, pt) => {                                                                 //получаем вершину и точку где она где node: {mass:#, p:{x,y}, name:"", data:{}}
                         const w = 13;                                                                     //ширина квадрата //ctx.fillStyle = (node.data.alone) ? "orange" : "black";
-                        ctx.fillStyle = "#337ab7";
+                        ctx.fillStyle = node.data.score > 0 ? "#32CD32" : "#DC143C";
+                        if (node.data.score == 0) {
+                            ctx.fillStyle = "#696969";
+                        }
                         ctx.fillRect(pt.x-w/2, pt.y-w/2, w,w);                                          //рисуем
                         ctx.fillStyle = "black";                                                        //цвет для шрифта
 
                         ctx.font = 'italic 13px sans-serif';                                            //шрифт
-                        ctx.fillText (node.data.firstName, pt.x+8, pt.y+8);                             //пишем имя у каждой точки
+                        ctx.fillText (`${node.data.firstName}  ${node.data.score}`, pt.x+8, pt.y+8);                             //пишем имя у каждой точки
                     })
             },
 
