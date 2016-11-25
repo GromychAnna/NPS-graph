@@ -20,7 +20,7 @@ export default ngModule => {
 
         let events = [
             {
-                "date":"2017-06-28T10:37:53.605Z",
+                "date":"11/25/2016",
                 "score":"-20",
                 "stakeholders":[
                     {

@@ -17,21 +17,42 @@ export default class EventCreateCtrl {
             stakeholders: []
         };
     }
+
+
+    updateStakeholdersScore (stakeholdersOnEvent, eventScore, dataStorageStakeholders) {//populate score for eavh stakeholder
+        for (let iterator = 0; iterator < stakeholdersOnEvent.length - 1; iterator++) {//parse str with stakeholders on event to object of stakeholders
+            stakeholdersOnEvent[iterator] = stakeholdersOnEvent[iterator] + "}";
+        }
+        for (let iterator = 0; iterator < stakeholdersOnEvent.length; iterator++) {//find stakeholder on event in stakeholders dictionary and change all data for stakeholders (with new score)
+            stakeholdersOnEvent[iterator] = JSON.parse(stakeholdersOnEvent[iterator]);
+            const currentStakeholder = _.find(dataStorageStakeholders, function(o) { return o.id === stakeholdersOnEvent[iterator].id; });
+            currentStakeholder.score = parseInt(currentStakeholder.score) + parseInt(eventScore);
+        }
+        return stakeholdersOnEvent;
+    }
+
+    dateFormat (eventDate) {
+        const msDate = Date.parse(eventDate);//formatting date
+        const singledate = `${msDate}`;
+        console.warn('singledate', singledate);
+        const changeddate = singledate.match(/\d+/g).map(function (s) { return new Date(+s); });
+        const date = new Date(changeddate);
+        const mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+        const day = ("0" + date.getDate()).slice(-2);
+        const ddmmyyyFromateDate = [mnth, day,date.getFullYear()].join("/");
+        console.warn('ddmmyyyFromateDate', ddmmyyyFromateDate);
+        return ddmmyyyFromateDate;
+    }
+
     createEvent () {
         let stakeholdersOnEvent = this.event.stakeholders.toString().split('},');
         const eventScore = this.event.score;
-        for (let iterator = 0; iterator < stakeholdersOnEvent.length - 1; iterator++) {
-            stakeholdersOnEvent[iterator] = stakeholdersOnEvent[iterator] + "}";
-        }
-        for (let iterator = 0; iterator < stakeholdersOnEvent.length; iterator++) {
-            stakeholdersOnEvent[iterator] = JSON.parse(stakeholdersOnEvent[iterator]);
-            const currentStakeholder = _.find(this.dataStorage.stakeholders, function(o) { return o.id === stakeholdersOnEvent[iterator].id; });
-            currentStakeholder.score = parseInt(currentStakeholder.score) + parseInt(eventScore);
-        }
-        this.event.stakeholders = stakeholdersOnEvent;
+        this.event.stakeholders = this.updateStakeholdersScore(stakeholdersOnEvent, eventScore, this.dataStorage.stakeholders);
+        this.event.date = this.dateFormat(this.event.date);
         this.dataStorage.events.push(this.event);
         this.dataStorage.storeData(this.dataStorage.events, 'events');
         this.dataStorage.storeData(this.dataStorage.stakeholders, 'stakeholders');
         this.event = this.getDefaultValue();
     }
+
 }
