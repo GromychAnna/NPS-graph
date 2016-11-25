@@ -73,8 +73,6 @@ export default ngModule => {
                             let wt = !isNaN(weight) ? parseFloat(weight) : 1;
                             let arrowLength = 16 + wt;
                             let arrowWidth = 4 + wt;
-                            ctx.fillStyle = color;
-                            ctx.strokeStyle = "#9BCD9B";
                             ctx.translate(head.x, head.y);
                             ctx.rotate(Math.atan2(head.y - tail.y, head.x - tail.x));
 
@@ -83,12 +81,16 @@ export default ngModule => {
 
                             // draw the chevron
                             ctx.beginPath();
+                            ctx.fillStyle = color;
+                            ctx.strokeStyle = color;
                             ctx.moveTo(-arrowLength, arrowWidth);
                             ctx.lineTo(0, 0);
                             ctx.lineTo(-arrowLength, -arrowWidth);
                             ctx.lineTo(-arrowLength * 0.8, -0);
-                            ctx.closePath();
+                            //ctx.closePath();
                             ctx.fill();
+                            //ctx.strokeStyle="#DC143C";
+                            ctx.stroke();
                             ctx.restore()
                         }
                     });
@@ -256,6 +258,7 @@ export default ngModule => {
             },
             link: (scope, element, attrs) => {
                 //debugger
+
                 drawGraph(element[0],scope.stakeholders, scope.edges);
                 scope.$watch(
                     ()=> scope.stakeholder,

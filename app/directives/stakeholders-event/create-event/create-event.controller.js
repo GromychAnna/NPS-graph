@@ -9,8 +9,10 @@ export default class EventCreateCtrl {
     }
 
     getDefaultValue () {
+        const currentDate = document.getElementById("date").valueAsDate = new Date();
+
         return {
-            date: '18.11.2016',
+            date: currentDate,
             score: 0,
             stakeholders: []
         };

@@ -1,9 +1,9 @@
 form.form-horizontal(role='form', name='addEventForm', ng-submit='$ctrl.createEvent()')
     h2.text-center Add event
     .form-group
-        label.col-md-3.control-label Date
+        label.col-md-3.control-label#date Date
         .col-md-9
-            input.form-control(type='text', required='', name='date', ng-model='$ctrl.event.date')
+            input.form-control(type='date', required='', name='date', ng-model='$ctrl.event.date')
     .form-group
         label.col-md-3.control-label Score
         .col-md-9
