@@ -41,10 +41,10 @@ table.table.col-xs-7(style="margin: 0 auto;")
             .action.for-view-mode(ng-if="!stakeholder.editable")
                 button.btn.btn-primary(ng-click='$ctrl.editStakeholder(stakeholder)')
                     | Edit
-                button.btn.btn-primary(ng-click='$ctrl.removeStakeholder($index)')
+                button.btn.btn-primary.remove(ng-click='$ctrl.removeStakeholder($index)')
                     | Remove
             .action.for-edit-mode(ng-if="stakeholder.editable")
                 button.btn.btn-primary(type='button', ng-click='$ctrl.saveChanges($index)')
                     | Save
-                button.btn.btn-primary(type='button', ng-click='$ctrl.rejectChanges(stakeholder)')
+                button.btn.btn-primary.cancel(type='button', ng-click='$ctrl.rejectChanges(stakeholder)')
                     | Cancel

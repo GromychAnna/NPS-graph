@@ -7,18 +7,19 @@ form.form-horizontal(role='form', name='addEventForm', ng-submit='$ctrl.createEv
     .form-group
         label.col-md-3.control-label Score
         .col-md-9
-            input.form-control(type='text', required='', name='score', ng-model='$ctrl.event.score')
+            input.form-control(type='number', required="", min="-30", max="30", name='score', ng-model='$ctrl.event.score')
     .form-group
         label.col-md-3.stakeholder(for='stakeholders') Stakeholders
         .col-md-9
             select#stakeholders.form-control(
             name='stakeholders',
             multiple,
+            required=''
             ng-dropdown-multiselect='',
             options='$ctrl.stakeholdersList',
             ng-model='$ctrl.event.stakeholders')
                 option(ng-repeat='option in $ctrl.stakeholdersList track by $index',
                 value='{{option}}',
                 ng-bind="option.firstName")
-    .form-group
-        button.btn.btn-primary.col-md-offset-9(type='submit') Submit
+    .form-group.text-right
+        button.btn.btn-primary.submit-event(type='submit') Submit
