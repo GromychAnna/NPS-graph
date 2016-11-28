@@ -1,25 +1,7 @@
-    //TODO: move to factory
-    var config = {
-        apiKey: "AIzaSyBcuzy9X_SMg-tUOKLuNGfxYNk2gnXm-z4",
-        authDomain: "nps-in-depth.firebaseapp.com",
-        databaseURL: "https://nps-in-depth.firebaseio.com",
-        storageBucket: "nps-in-depth.appspot.com",
-        messagingSenderId: "592652465988"
-    };
-    firebase.initializeApp(config);
 export default class StakeholdersCtrl {
-    constructor(dataStorage, $firebaseObject){
+    constructor(dataStorage){
         this.dataStorage = dataStorage;
         this.selectedStakeholder = {};
-
-        //TODO: move to factory
-            const rootRef = firebase.database().ref().child('nps-in-depth');//create reference to db where angular is root of DB
-            const ref = rootRef.child('testObject');
-            this.object = $firebaseObject(ref);//function that takes reference to DB
-            console.warn('this.object', this.object);
-        //angular now have property 'object'
-        //in 'object' exist 'ref'
-        //last two str - for sinhronising data between angular and firebase
     }
 
     editStakeholder (stakeholder) {

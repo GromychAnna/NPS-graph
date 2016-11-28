@@ -37,18 +37,9 @@ export default ngModule => {
 
                 particleSystem.eachEdge(                                                                //отрисуем каждую грань
                     function(edge, pt1, pt2){                                                           //будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}//console.warn('EDGE', data);
-
-                        //ctx.strokeStyle = "rgba(0,0,0, .333)";                                          //грани будут чёрным цветом с некой прозрачностью
-                        //ctx.lineWidth = 1;
-                        //ctx.beginPath();//начинаем рисовать
-                        //ctx.moveTo(pt1.x, pt1.y);//от точки один
-                        //ctx.lineTo(pt2.x, pt2.y);//до точки два
-                        //ctx.stroke();
-
                         const weight = 1;
                         let color = "#DCDCDC";
-
-                        //if (!color || (` ${color}`).match(/^[ \t]*$/)) { color = null};
+                        if (!color || (` ${color}`).match(/^[ \t]*$/)) { color = null};
 
                         // find the start point
                         let tail = intersect_line_box(pt1, pt2, nodeBoxes[edge.source.name]);
@@ -258,11 +249,14 @@ export default ngModule => {
             },
             link: (scope, element, attrs) => {
                 //debugger
+                const reportsEdges = scope.edges;
+                const peerEdges = scope.edges;
 
                 drawGraph(element[0],scope.stakeholders, scope.edges);
                 scope.$watch(
                     ()=> scope.stakeholder,
                     (value) => {
+                        //drawGraph(element[0],scope.stakeholders, scope.edges);
                         sys.renderer = renderer(element[0], {stakeholders: value, edges: scope.edges});
                     }
                 );
@@ -270,6 +264,7 @@ export default ngModule => {
                 scope.$watch(
                     ()=> scope.edges,
                     (value) => {
+                        //drawGraph(element[0],scope.stakeholders, scope.edges);
                         sys.renderer = renderer(element[0], {stakeholders: scope.stakeholders, edges: value});
                     }
                 );
