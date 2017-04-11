@@ -6,10 +6,10 @@
   "repository": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "start http://localhost:8080/webpack-dev-server/ & webpack-dev-server --content-base app",
+    "start": "start http://localhost:3000/webpack-dev-server/ & webpack-dev-server --content-base app",
     "build": "NODE_ENV=production node node_modules/.bin/webpack && cp app/index.html dist/index.html"
   },
-  "author": "Anna Gromuch",
+  "author": "Anna Gromych",
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
     "babel-core": "^5.8.38",
@@ -39,7 +39,6 @@
   "dependencies": {
     "angular": "1.5.8",
     "angularfire": "^2.1.0",
-    "angularjs-dropdown-multiselect": "^1.10.2",
     "jquery": "^3.1.1",
     "lodash": "4.15.0"
   }

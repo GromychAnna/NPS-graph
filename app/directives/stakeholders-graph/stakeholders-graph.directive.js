@@ -38,7 +38,26 @@ export default ngModule => {
                 particleSystem.eachEdge(                                                                //отрисуем каждую грань
                     function(edge, pt1, pt2){                                                           //будем работать с гранями и точками её начала и конца где edge: {source:Node, target:Node, length:#, data:{}}//console.warn('EDGE', data);
                         const weight = 1;
-                        let color = "#DCDCDC";
+                        let color = "#FF0000";
+                        if (edge.data === "Reports to"){
+                            let color = "#0000FF";
+                            if (!color || (` ${color}`).match(/^[ \t]*$/)) { color = null};
+
+                            // find the start point
+                            let tail = intersect_line_box(pt1, pt2, nodeBoxes[edge.source.name]);
+                            let head = intersect_line_box(tail, pt2, nodeBoxes[edge.target.name]);
+
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.lineWidth = (!isNaN(weight)) ? parseFloat(weight) : 1;
+                            ctx.strokeStyle = (color) ? color : "#cccccc";
+                            ctx.fillStyle = null;
+
+                            ctx.moveTo(tail.x, tail.y);
+                            ctx.lineTo(head.x, head.y);
+                            ctx.stroke();
+                            ctx.restore();
+                        }
                         if (!color || (` ${color}`).match(/^[ \t]*$/)) { color = null};
 
                         // find the start point
@@ -59,7 +78,8 @@ export default ngModule => {
                         // draw an arrowhead if this is a -> style edge
                         if (edge.data === "Reports to"){
                             ctx.save();
-                            let color = "#9BCD9B";
+                            //debugger
+                            let color = "#00FF00";
                             // move to the head position of the edge we just drew
                             let wt = !isNaN(weight) ? parseFloat(weight) : 1;
                             let arrowLength = 16 + wt;

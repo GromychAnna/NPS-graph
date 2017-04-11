@@ -1,23 +1,26 @@
-var config = {
-    apiKey: "AIzaSyBcuzy9X_SMg-tUOKLuNGfxYNk2gnXm-z4",
-    authDomain: "nps-in-depth.firebaseapp.com",
-    databaseURL: "https://nps-in-depth.firebaseio.com",
-    storageBucket: "nps-in-depth.appspot.com",
-    messagingSenderId: "592652465988"
-};
-firebase.initializeApp(config);
+//var config = {
+//    apiKey: "AIzaSyBcuzy9X_SMg-tUOKLuNGfxYNk2gnXm-z4",
+//    authDomain: "nps-in-depth.firebaseapp.com",
+//    databaseURL: "https://nps-in-depth.firebaseio.com",
+//    storageBucket: "nps-in-depth.appspot.com",
+//    messagingSenderId: "592652465988"
+//};
+//firebase.initializeApp(config);
 
 export default ngModule => {
     ngModule.factory('dataStorage',  function ($firebaseObject) {
         const KEYS_FOR_STORE = ['stakeholders', 'edges', 'events'];
+        const storedStakeholders = getStoredData(KEYS_FOR_STORE[0]);
+        const storedEdges = getStoredData(KEYS_FOR_STORE[1]);
+        const storedEvent = getStoredData(KEYS_FOR_STORE[2]);
 
-        const rootRef = firebase.database().ref();//create reference to db where angular is root of DB
-        //const ref = rootRef.child('testObject');
-        //this.object = $firebaseObject(ref);//function that takes reference to DB
-
-        const storedStakeholders = $firebaseObject(rootRef.child(KEYS_FOR_STORE[0]));
-        const storedEdges = $firebaseObject(rootRef.child(KEYS_FOR_STORE[1]));
-        const storedEvent = $firebaseObject(rootRef.child(KEYS_FOR_STORE[2]));
+            //const rootRef = firebase.database().ref();//create reference to db where angular is root of DB
+            ////const ref = rootRef.child('testObject');
+            ////this.object = $firebaseObject(ref);//function that takes reference to DB
+            //
+            //const storedStakeholders = $firebaseObject(rootRef.child(KEYS_FOR_STORE[0]));
+            //const storedEdges = $firebaseObject(rootRef.child(KEYS_FOR_STORE[1]));
+            //const storedEvent = $firebaseObject(rootRef.child(KEYS_FOR_STORE[2]));
 
         const edgeTypes = [
             {"name": "Reports to"},
@@ -129,9 +132,12 @@ export default ngModule => {
         ];
 
         return {
-            stakeholders: storedStakeholders ? storedStakeholders : stakeholders,
-            edges: storedEdges ?  storedEdges : edges,
-            events: storedEvent ?  events : events,
+            //stakeholders: storedStakeholders ? storedStakeholders : stakeholders,
+            //edges: storedEdges ?  storedEdges : edges,
+            //events: storedEvent ?  events : events,
+            stakeholders: storedStakeholders ? JSON.parse(storedStakeholders) : stakeholders,
+            edges: storedEdges ?  JSON.parse(storedEdges) : edges,
+            events: storedEvent ?  JSON.parse(storedEvent) : events,
             edgeTypes,
             getStoredData,
             storeData

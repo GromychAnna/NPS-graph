@@ -25,7 +25,7 @@ form.form-horizontal(role='form', name='addEdgeForm', ng-submit='$ctrl.addEdge()
         for='stakeholder2')
     select#stakeholder2.form-control.col-md-12(
         name='stakeholder2',
-    required='',
+        required='',
         ng-model='$ctrl.edge.dest')
         option(ng-repeat='option in $ctrl.stakeholdersList',
                value='{{option.id}}',
